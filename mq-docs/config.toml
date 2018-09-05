@@ -1,19 +1,8 @@
-baseURL = "/"
-languageCode = "en-US"
-defaultContentLanguage = "en"
+baseURL = "http://example.org/"
+languageCode = "en-us"
+title = "My New Hugo Site"
 
-title = "Hugo Learn Documentation"
 theme = "hugo-theme-learn"
-metaDataFormat = "yaml"
-defaultContentLanguageInSubdir= true
-
-[params]
-  editURL = "https://github.com/matcornic/hugo-theme-learn/edit/master/exampleSite/content/"
-  description = "Documentation for Hugo Learn Theme"
-  author = "Mathieu Cornic"
-  showVisitedLinks = true
-  disableBreadcrumb = true
-  disableNextPrev = true
 
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
