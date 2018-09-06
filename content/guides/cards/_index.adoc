@@ -1,4 +1,5 @@
 +++
 title = "Cards"
 weight = 30
+layout = category_home
 +++
