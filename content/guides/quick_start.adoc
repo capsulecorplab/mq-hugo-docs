@@ -15,6 +15,7 @@ This page walks you through the simplest and most basic setup that allows for si
 
 This page also instructs customers on how to configure the sandbox environment to send webhook notifications in response to transaction events.
 
+[#basic-concepts]
 ## Basic concepts
 
 The fundamental purpose of the Marqeta API is to issue payment cards and customize card behavior. In a production environment, cards are used to pay merchants for goods and services. When such a purchase occurs, the transaction is routed over a payment card network to Marqeta for approval. However, because the sandbox environment is not connected to an actual payment card network, transactions are simulated.

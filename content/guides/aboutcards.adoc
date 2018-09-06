@@ -2,6 +2,10 @@
 title = "About Cards"
 +++
 
+Refer to <<quick_start.adoc#basic-concepts, Quick Start > Basic Concepts>> for more information
+
+[#primitives-nulls]
+
 A card is a payment device that enables a user to conduct transactions at merchants.
 Cards can be physical or virtual.
 You can also tokenize cards for use in digital wallets.
