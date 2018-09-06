@@ -7,16 +7,16 @@ title: "Developers"
 Welcome to Marqeta! You can learn about the features of the Marqeta platform by using the guides and reference documentation.
 
 ## Guides
-##### Learn the Marqeta platform
+### Learn the Marqeta platform
 
 Discover key concepts of the Marqeta platform with hands-on tutorials.
 
 ## Core API
-##### Issue cards and manage payments
+### Issue cards and manage payments
 
 Create users, fund accounts, and control spending with the Core API.
 
 ## DiVA API
-##### Explore data insights
+### Explore data insights
 
 View filterable, curated production data with the Data insights, Visualizations, and Analytics (DiVA) API.
