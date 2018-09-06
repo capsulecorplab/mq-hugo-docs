@@ -1,3 +1,5 @@
+ignorefiles = [ "guides/snippets" ]
+
 baseURL = "https://zen-ardinghelli-342594.netlify.com"
 languageCode = "en-us"
 title = "My New Hugo Site"
