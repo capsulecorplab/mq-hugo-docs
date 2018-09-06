@@ -1,12 +1,22 @@
 ---
-title: "Aaron's Big Hugo Test"
+title: "Developers"
 ---
 
-# Hugo learn theme
+# BUILD WITH MARQETA
 
-[Hugo-theme-learn](http://github.com/matcornic/hugo-theme-learn) is a theme for [Hugo](https://gohugo.io/), a fast and modern static website engine written in Go. Where Hugo is often used for blogs, this multilingual-ready theme is **fully designed for documentation**.
+Welcome to Marqeta! You can learn about the features of the Marqeta platform by using the guides and reference documentation.
 
-This theme is a partial porting of the [Learn theme](http://learn.getgrav.org/) of [Grav](https://getgrav.org/), a modern flat-file CMS written in PHP.
+## Guides
+##### Learn the Marqeta platform
 
-{{% notice tip %}}Learn theme works with a _page tree structure_ to organize content : All contents are pages, which belong to other pages. [read more about this]({{%relref "cont/pages/_index.md"%}})
-{{% /notice %}}
+Discover key concepts of the Marqeta platform with hands-on tutorials.
+
+## Core API
+##### Issue cards and manage payments
+
+Create users, fund accounts, and control spending with the Core API.
+
+## DiVA API
+##### Explore data insights
+
+View filterable, curated production data with the Data insights, Visualizations, and Analytics (DiVA) API.
