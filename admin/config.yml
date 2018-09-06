@@ -1,5 +1,6 @@
 backend:
   name: git-gateway
+  repo: aaronverber/mq-hugo-docs # Path to your Github repository
   branch: master # Branch to update (optional; defaults to master)
 
 # This line should *not* be indented
