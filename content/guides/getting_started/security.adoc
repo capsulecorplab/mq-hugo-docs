@@ -1,6 +1,6 @@
 +++
 title = "Security"
-weight = 2
+weight = 20
 +++
 
 At Marqeta, security is paramount.

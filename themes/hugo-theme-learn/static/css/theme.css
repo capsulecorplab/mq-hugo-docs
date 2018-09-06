@@ -62,7 +62,7 @@ b, strong, label, th {
     fill: #fff !important;
 }
 #sidebar {
-    font-weight: 300 !important;
+    font-weight: 400 !important;
 }
 fieldset {
     border: 1px solid #ddd;
@@ -440,10 +440,9 @@ h2, h3, h4, h5, h6 {
 }
 h1 {
     font-family: "Open Sans", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
-    text-align: center;
-    text-transform: uppercase;
-    color: #222;
-    font-weight: 200;
+    text-align: left;
+    color: #130959;
+    font-weight: 600;
 }
 blockquote {
     border-left: 10px solid #F0F2F4;

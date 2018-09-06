@@ -1,10 +1,12 @@
 {{ partial "header.html" . }}
 
+<p>This is a test.</p>
+
 <ul>
         {{ $currentPage := . }}
         {{ range .Site.Menus.main }}
             {{ if .HasChildren }}
-                <li class="{{ if $currentPage.HasMenuCurrent "main" . }}active{{ end }}">
+                <li class="{{ if $currentPage.HasMenuCurrent "guides" . }}active{{ end }}">
                     <a href="#">
                         {{ .Pre }}
                         <span>{{ .Name }}</span>
@@ -12,7 +14,7 @@
                 </li>
                 <ul class="sub-menu">
                     {{ range .Children }}
-                        <li class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}">
+                        <li class="{{ if $currentPage.IsMenuCurrent "guides" . }}active{{ end }}">
                             <a href="{{ .URL }}">{{ .Name }}</a>
                         </li>
                     {{ end }}

@@ -1,6 +1,6 @@
 +++
-title = "Cards"
-weight = 30
+title = "Getting Started"
+weight = 2
 type = "category_home"
 layout = "category_home"
 +++

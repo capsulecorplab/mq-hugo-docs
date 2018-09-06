@@ -1,6 +1,6 @@
 +++
 title = "Quick Start"
-weight = 1
+weight = 10
 +++
 
 .The Global Standard For Modern Card Issuing

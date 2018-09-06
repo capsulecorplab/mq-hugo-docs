@@ -1,6 +1,6 @@
 +++
 title = "Summary of Resources"
-weight = 3
+weight = 30
 +++
 
 The Marqeta payment platform is designed to be comprehensive and flexible: you can pick and choose from a variety of implementation options that best suit the needs of your audience.
