@@ -9,7 +9,7 @@ Marqeta is rewriting the rules for what’s possible with payment cards. Marqeta
 
 Marqeta provides its customers with a sandbox environment in order to aquaint them with the Marqeta API. The sandbox allows customers to create the objects required to conduct financial transactions and to then simulate transactions using those objects.
 
-include::snippets/note_contact_support.adoc[]
+include::note_contact_support.adoc[]
 
 This page walks you through the simplest and most basic setup that allows for simulating transactions. In brief, you will learn how to access the sandbox, create four objects (a card product, a funding source, a user, and a card), fund the user's account, and then simulate a transaction. (Note that in this example, you explicitly pre-fund the user's account before simulating a transaction. In a more complex scenario, you might choose instead to employ Just-In-Time Funding, whereby funds for the transaction amount are automatically loaded into the user's account at transaction time.)
 
