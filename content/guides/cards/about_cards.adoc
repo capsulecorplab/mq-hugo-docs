@@ -2,9 +2,7 @@
 title = "About Cards"
 +++
 
-Refer to <</guides/quick_start.adoc#basic-concepts, Quick Start > Basic Concepts>> for more information
-
-[#primitives-nulls]
+Refer to <</guides/quick_start.adoc#basic-concepts, Quick Start > Basic Concepts>> for more information.
 
 A card is a payment device that enables a user to conduct transactions at merchants.
 Cards can be physical or virtual.
@@ -108,11 +106,6 @@ The attributes of a card product answer the following questions about cards:
 The following table outlines a card's attributes and behaviors by their source.
 
 ++++
-
-
 <p data-height="265" data-theme-id="0" data-slug-hash="YONMEa" data-default-tab="js,result" data-user="quinlo" data-pen-title="Credit Card Payment Form" class="codepen">See the Pen <a href="https://codepen.io/quinlo/pen/YONMEa/">Credit Card Payment Form</a> by Adam Quinlan (<a href="https://codepen.io/quinlo">@quinlo</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
-
 ++++
-
-Test.
