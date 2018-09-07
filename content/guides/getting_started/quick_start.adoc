@@ -3,11 +3,6 @@ title = "Quick Start"
 weight = 10
 +++
 
-.The Global Standard For Modern Card Issuing
-****
-Marqeta is rewriting the rules for what’s possible with payment cards. Marqeta’s open API platform is designed for developers who want a simplified way of managing payment programs.
-****
-
 Marqeta provides its customers with a sandbox environment in order to aquaint them with the Marqeta API. The sandbox allows customers to create the objects required to conduct financial transactions and to then simulate transactions using those objects.
 
 include::content/guides/snippets/note_contact_support.adoc[]
@@ -28,3 +23,5 @@ A `card` is an example of a first-class object, in which the object name occupie
 The Marqeta API is RESTful, meaning that it uses HTTP verbs (`POST`, `PUT`, `GET`) to perform functions on objects. Specifically, `POST` is used to create an object, `PUT` to update an object, and `GET` to retrieve an object. For example, to create a new user object you would send a `POST` request to `/users`.
 
 `POST` and `PUT` requests usually require data to be passed in the message body in order to define the attributes of the object being created or updated. This data must be in JSON format.
+
+This is an additional line I'm adding.
