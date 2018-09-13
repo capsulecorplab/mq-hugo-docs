@@ -2,7 +2,8 @@
 title = "About Address Verification"
 +++
 
-The Address Verification System (AVS) compares purchaser-provided address data against card holder address data held on file by the Marqeta platform and makes a match determination. You can configure AVS to decline transactions programmatically based on a mismatched street address or postal code.
+The Address Verification System (AVS) compares purchaser-provided address data against card holder address data held on file by the Marqeta platform and makes a match determination.
+You can configure AVS to decline transactions programmatically based on a mismatched street address or postal code.
 
 AVS is useful for card-not-present environments, such as e-commerce websites, and points of sale without clerks, such as automated fuel dispensers—wherever there is additional need to verify that the person making the purchase is the legitimate card holder.
 
@@ -14,7 +15,8 @@ At the end of the guide, you should understand:
 - How AVS affects transactions using Just-in-Time (JIT) Funding.
 
 ## AVS match determinations
-AVS attempts to match address data provided by the purchaser with the card holder's address data. If the merchant does not provide address data in the transaction message, the Marqeta platform does not attempt address verification.
+AVS attempts to match address data provided by the purchaser with the card holder's address data.
+If the merchant does not provide address data in the transaction message, the Marqeta platform does not attempt address verification.
 
 If you enable AVS for a given transaction type, and the merchant includes the address data of the card holder, the Marqeta platform's transaction record includes the purchaser-provided address, the Marqeta platform's on-file address, and the Marqeta platform's match determination, which indicates whether the two street addresses and postal codes match.
 
@@ -30,7 +32,8 @@ Multiple resources on the Marqeta platform can contain the on-file address data.
 For example, if the user object that represents the card holder does not contain address data, AVS attempts to match the address data contained in the parent user object.
 
 ## Configuring AVS behaviors
-The Marqeta platform defines AVS behaviors at the card product level. AVS match determinations are enabled by default for the following types of transactions:
+The Marqeta platform defines AVS behaviors at the card product level.
+AVS match determinations are enabled by default for the following types of transactions:
 
 - Authorization messages.
 - Account verification messages.
@@ -45,6 +48,8 @@ If AVS is enabled for authorization or account verification messages, you can co
 
 For example, you can configure AVS to decline authorizations based on a mismatched street address but allow authorizations with a mismatched postal code.
 
-The Marqeta platform does not decline digital wallet token activation requests based on AVS mismatches. Instead, the Marqeta platform returns a "Not declined" response to the network, which triggers a request for further verification before provisioning a digital wallet token. See Managing the Lifecycle of Digital Wallet Tokens for more information on additional verification options.
+The Marqeta platform does not decline digital wallet token activation requests based on AVS mismatches.
+Instead, the Marqeta platform returns a "Not declined" response to the network, which triggers a request for further verification before provisioning a digital wallet token.
+See Managing the Lifecycle of Digital Wallet Tokens for more information on additional verification options.
 
 NOTE: To review your card product's AVS configuration, issue a GET to /cardproducts/{token} using your card product's token as the path parameter. For a complete description of the /cardproducts endpoint, see Card Products.
