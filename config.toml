@@ -1,4 +1,4 @@
-ignorefiles = [ "guides/snippets" ]
+ignorefiles = [ "guides/snippets", "core/code_samples" ]
 
 baseURL = "https://zen-ardinghelli-342594.netlify.com"
 languageCode = "en-us"
