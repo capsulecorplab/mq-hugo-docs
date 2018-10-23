@@ -3,7 +3,8 @@ title = "Also Cards"
 +++
 
 = Also Cards
-:endpointdir: content/core/cards/cards_endpoint
+:endpointdir: content/api/core/cards/cards_endpoints
+:outfilesuffix: /
 
 The cards resource represents the payment cards with which users conduct transactions. 
 Cards are owned by users and communicate with the Marqeta platform over card networks such as Discover, Mastercard, and Visa. 
@@ -11,7 +12,7 @@ Each card has a number of attributes, such as a primary account number (PAN), ex
 Cards are derived from and controlled by a card product.
 
 [NOTE]
-For an overview of cards and the card object, see <</guides/cards/about_cards.adoc#basic-concepts, About Cards>>.
+For an overview of cards and the card object, see <</guides/cards/about_cards#_cards_in_the_payments_ecosystem, About Cards>>.
 
 include::{endpointdir}/create_card.adoc[]
 

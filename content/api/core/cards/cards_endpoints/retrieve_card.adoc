@@ -1,4 +1,4 @@
-:sampledir: content/core/cards/cards_samples
+:sampledir: ../cards_samples
 
 == Retrieve card
 

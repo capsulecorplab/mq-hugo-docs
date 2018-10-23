@@ -1,8 +1,8 @@
-ignorefiles = [ "guides/snippets", "core/cards/cards_endpoints" ]
+ignorefiles = [ "guides/snippets", "api" ]
 
 baseURL = "https://zen-ardinghelli-342594.netlify.com"
 languageCode = "en-us"
-title = "Marqeta Developers"
+title = "Marqeta Dev"
 
 theme = "hugo-theme-learn"
 
