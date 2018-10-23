@@ -1,17 +1,3 @@
-+++
-title = "Cards"
-+++
-
-= Cards
-
-The cards resource represents the payment cards with which users conduct transactions. 
-Cards are owned by users and communicate with the Marqeta platform over card networks such as Discover, Mastercard, and Visa. 
-Each card has a number of attributes, such as a primary account number (PAN), expiration date, and card verification value (CVV2). 
-Cards are derived from and controlled by a card product.
-
-[NOTE]
-For an overview of cards and the card object, see About Cards.
-
 == Create card
 
 *Action:* `POST` +
@@ -46,12 +32,12 @@ Note that if show_pan and show_cvv_number are set to "true", the fulfillment sta
 | user_token | string | Yes | The unique identifier of the authorized user of the card. | Existing user token. <br> <br> Issue a GET to /users to retrieve user tokens.
 | fulfillment |object |No | Determines physical characteristics of a card and shipment information. |
 | reissue_pan_from_card_token | string | No | Reissues the specified card (known as the _source_ card). <br> <br> This field reissues a card by copying the PAN and PIN from the specified source card to the newly created card. The reissued card has the same PAN and PIN as the source card but a new expiration date and CVV2 number. <br> <br> **Note:** By default, the source card is automatically terminated. However, if your program is configured for multiple active cards, you can prevent the source card from being automatically terminated by setting the `activation_actions.terminate_reissued_source_card` field to false.| Existing card token. <br> <br> Issue a GET to /cards/user/{token} to retrieve card tokens for a particular user.
-| translate\_pin\_from\_card\_token | string | No | Copies the PIN from the specified card to the newly created card.  <br> <br> Both cards must belong to the same user. This field is not allowed if `reissue_pan_from_card_token` is set. | Existing card token. <br> <br> Issue a GET to /cards/user/{token} to retrieve card tokens for a particular user.
-| card\_product\_token | string | Yes | The unique identifier of the card product. | Existing card product token. <br> <br> Issue a GET to /cardproducts to retrieve card product tokens.
-| bulk\_issuance\_token | string | No | Associates the card with the specified bulk card order. **This field cannot be updated.** | 36 char max 
+| translate_pin_from_card_token | string | No | Copies the PIN from the specified card to the newly created card.  <br> <br> Both cards must belong to the same user. This field is not allowed if `reissue_pan_from_card_token` is set. | Existing card token. <br> <br> Issue a GET to /cards/user/{token} to retrieve card tokens for a particular user.
+| card_product_token | string | Yes | The unique identifier of the card product. | Existing card product token. <br> <br> Issue a GET to /cardproducts to retrieve card product tokens.
+| bulk_issuance_token | string | No | Associates the card with the specified bulk card order. **This field cannot be updated.** | 36 char max 
 | expedite | boolean | No | Set to `true` to request expedited processing and shipping of the card. Expedited orders ignore the setting of the`fulfillment.shipping.method` field and always ship by FedEx Priority mail. <br> <br> This expedited service is available only for cards fulfilled by [Perfect Plastic Printing](http://perfectplastic.com/) and [IDEMIA](http://www.idemia.com). For other fulfillment providers, set this field to `false`. <br> <br> **Note:** Contact Marqeta Customer Success for information regarding the cost of expedited service. | true &vert; false; <br> <br> Default: false
-| expiration\_offset | object | No | Specifies the length of time for which the card is valid. In other words, the card expires this length of time after the date of issue. <br> <br> If not specified, the card uses the config.card\_life\_cycle.expiration\_offset of the card product. 
-| activation\_actions | object | No | Defines actions to execute when the card is activated. The fields in this object are mutually exclusive.
+| expiration_offset | object | No | Specifies the length of time for which the card is valid. In other words, the card expires this length of time after the date of issue. <br> <br> If not specified, the card uses the config.card\_life\_cycle.expiration\_offset of the card product. 
+| activation_actions | object | No | Defines actions to execute when the card is activated. The fields in this object are mutually exclusive.
 | metadata | object | No | Associates customer-injected metadata with the user.
 |===
 
@@ -105,9 +91,9 @@ Note that if show_pan and show_cvv_number are set to "true", the fulfillment sta
 | postal_code | string | No | Postal code. | 50 char max
 | country  | string | No | Country. | 40 char max
 | phone | string | No | Telephone number. | 50 char max
-| first\_name | string | No | First Name. | 50 char max
-| middle\_name | string | No | Middle Name. | 50 char max
-| last\_name | string | No | Last Name. | 50 char max
+| first_name | string | No | First Name. | 50 char max
+| middle_name | string | No | Middle Name. | 50 char max
+| last_name | string | No | Last Name. | 50 char max
 |===
 
 ==== The fulfillment.card_personalization object
@@ -129,8 +115,8 @@ Contact your Marqeta Customer Success representative to make use of card persona
 |===
 | Name | Type | Required? | Description | Allowable Values
 
-| name\_line\_1.value | string | No | First line of personalized text printed on the card. | The card can accommodate only 21 characters. Strings longer than 21 characters are truncated.
-| name\_line\_2.value | string | No | Second line of personalized text printed on the card. | The card can accommodate only 21 characters. Strings longer than 21 characters are truncated.
+| name_line_1.value | string | No | First line of personalized text printed on the card. | The card can accommodate only 21 characters. Strings longer than 21 characters are truncated.
+| name_line_2.value | string | No | Second line of personalized text printed on the card. | The card can accommodate only 21 characters. Strings longer than 21 characters are truncated.
 |===
 
 ==== The fulfillment.card_personalization.carrier object
@@ -172,13 +158,20 @@ Use this carrier object if your fulfillment provider is Arroweye Solutions.
 [NOTE]
 Use this carrier object if your fulfillment provider is Perfect Plastic Printing or IDEMIA.
 
-| Name | Type | Required? | Description | Allowable Values | | --- | --- | --- | --- | --- | | name | string | No | Specifies a PNG image to display on the card carrier. | Contains the name of the image file and must match the file you send to your fulfillment provider.  <br> <br> Must end in `.png`.| message\_1 | string | No | Specifies a custom message that appears on the card carrier. | 60 char max
+|===
+| Name | Type | Required? | Description | Allowable Values
+
+| name | string | No | Specifies a PNG image to display on the card carrier. | Contains the name of the image file and must match the file you send to your fulfillment provider.  <br> <br> Must end in `.png`.
+| message\_1 | string | No | Specifies a custom message that appears on the card carrier. | 60 char max
+|===
 
 ==== The metadata object
 
+|===
 | Name	| Type | Required? | Description | Allowable Values
 
 | _customer_defined_name_01_ | string | No | Associates customer-injected metadata with the card. The Marqeta customer defines the names and values of up to 20 fields, for example:<br><br><span class="code-font">"metadata": {<br>&nbsp;&nbsp;"my\_name\_1": "my\_value\_1",<br>&nbsp;&nbsp;"my\_name\_2": "my\_value\_2"<br>&nbsp;&nbsp;}</span> | Up to 20 name-value pairs. <br> <br> 255 char max per name; 255 char max per value.
+|===
 
 === Card state and fulfillment status
 
@@ -198,6 +191,7 @@ A card's state and physical order fulfillment status is managed either by the Ma
 
 ==== Card fulfillment status
 
+|===
 | Status | Description
 
 | ISSUED | Initial state of all newly created/issued cards.
@@ -207,8 +201,9 @@ A card's state and physical order fulfillment status is managed either by the Ma
 | SHIPPED | Card shipped by card fulfillment provider.
 | DELIVERED | Card delivered by shipping provider.
 | DIGITALLY_PRESENTED | Card digitally presented using the /cards/{token}/showpan endpoint; does not affect the delivery of physical cards.
+|===
 
-Sample request body
+=== Sample request body
 
 [source,json]
 {  
@@ -249,7 +244,56 @@ Sample request body
     }
 }
 
-Sample response body
+=== Sample response body
 
 [source,json]
-{  "created_time": "2017-02-14T18:48:10Z",  "last_modified_time": "2017-02-14T18:48:10Z",  "token": "mytestcard01",  "user_token": "my_user_01",  "card_product_token": "red_cardproduct",  "last_four": "8949",  "pan": "111111______8949",  "expiration": "0221",  "expiration_time": "2021-02-28T23:59:59Z",  "barcode": "17469201908992951865",  "pin_is_set": false,  "state": "UNACTIVATED",  "state_reason": "New card",  "expedite": false,  "fulfillment_status": "ISSUED",  "fulfillment": {    "card_personalization": {      "text": {          "name_line_1": {            "value": "my line 1 text"          },          "name_line_2": {            "value": "my line 2 text"          }      },      "images": {        "card": {           "name": "my_card_logo.png",           "thermal_color": "Black"        },        "carrier": {          "name": "my_carrier_logo.png",          "message_1": "my message"        },        "signature": {          "name": "my_signature.png"        },        "carrier_return_window": {          "name": "my_return_address_image.png"        }      }    }  },  "instrument_type": "PHYSICAL_MSR",  "metadata": {    	"key1":"value1",    	"key2":"value2"  }
+{
+    "created_time": "2017-02-14T18:48:10Z",
+    "last_modified_time": "2017-02-14T18:48:10Z",
+    "token": "mytestcard01",
+    "user_token": "my_user_01",
+    "card_product_token": "red_cardproduct",
+    "last_four": "8949",
+    "pan": "111111______8949",
+    "expiration": "0221",
+    "expiration_time": "2021-02-28T23:59:59Z",
+    "barcode": "17469201908992951865",
+    "pin_is_set": false,
+    "state": "UNACTIVATED",
+    "state_reason": "New card",
+    "expedite": false,
+    "fulfillment_status": "ISSUED",
+    "fulfillment": {
+        "card_personalization": {
+            "text": {
+                "name_line_1": {
+                    "value": "my line 1 text"
+                },
+                "name_line_2": {
+                    "value": "my line 2 text"
+                }
+            },
+            "images": {
+                "card": {
+                    "name": "my_card_logo.png",
+                    "thermal_color": "Black"
+                },
+                "carrier": {
+                    "name": "my_carrier_logo.png",
+                    "message_1": "my message"
+                },
+                "signature": {
+                    "name": "my_signature.png"
+                },
+                "carrier_return_window": {
+                    "name": "my_return_address_image.png"
+                }
+            }
+        }
+    },
+    "instrument_type": "PHYSICAL_MSR",
+    "metadata": {
+        "key1": "value1",
+        "key2": "value2"
+    }
+}

@@ -1,0 +1,8 @@
+= Also Cards
+:includedir: cards_endpoints
+
+include::{includedir}/create_card.adoc[]
+
+include::{includedir}/retrieve_card.adoc[]
+
+include::{includedir}/update_card.adoc[]

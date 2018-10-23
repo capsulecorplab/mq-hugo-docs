@@ -1,0 +1,718 @@
++++
+title = "Cards"
++++
+
+= Cards
+
+The cards resource represents the payment cards with which users conduct transactions. 
+Cards are owned by users and communicate with the Marqeta platform over card networks such as Discover, Mastercard, and Visa. 
+Each card has a number of attributes, such as a primary account number (PAN), expiration date, and card verification value (CVV2). 
+Cards are derived from and controlled by a card product.
+
+[NOTE]
+For an overview of cards and the card object, see About Cards.
+
+== Create card
+
+*Action:* `POST` +
+*Endpoint:* `/cards`
+
+Create a card using the user_token of the user that will own the card and the card_product_token of the card product that will control the card. 
+You must therefore create the user and card product before you can create the card.
+
+Note: By default, newly created cards are inactive and must be explicitly activated (see Create Card Transition for information on activating cards). 
+Alternatively, you can configure your card product's config.card_life_cycle.activate_upon_issue field such that cards are activated upon issue (see Card Products).
+
+Submit a POST to /pins/controltoken to set the card PIN if your program requires PIN numbers (for example, for EMV cards); this action updates the pin_is_set field to "true" (see the "Create or Update PIN" section on this page for details).
+
+=== Query parameters
+
+You can use optional query parameters to show both PAN and CVV2 number in the response. 
+Note that if show_pan and show_cvv_number are set to "true", the fulfillment state of the card is DIGITALLY_PRESENTED instead of the normal initial state of ISSUED; this alternate state does not affect the delivery of physical cards.
+
+|===
+| Name | Type | Required? | Description | Allowable Values
+
+| show_pan | boolean | No | Set to true to show the full PAN in the response. | true &vert; false <br> <br> Default: false
+| show_cvv\_number | boolean | No | Set to true to show the CVV2 number in the response. | true &vert; false <br> <br> Default: false
+|===
+
+=== Body field details
+
+|===
+| Name | Type | Required? | Description | Allowable Values
+
+| token | string | No | The unique identifier of the card. <br> <br> If you do not include a token, the system will generate one automatically. This token is necessary for use in other API calls, so we recommend that rather than let the system generate one, you use a simple string that is easy to remember. **This value cannot be updated.** | 36 char max
+| user_token | string | Yes | The unique identifier of the authorized user of the card. | Existing user token. <br> <br> Issue a GET to /users to retrieve user tokens.
+| fulfillment |object |No | Determines physical characteristics of a card and shipment information. |
+| reissue_pan_from_card_token | string | No | Reissues the specified card (known as the _source_ card). <br> <br> This field reissues a card by copying the PAN and PIN from the specified source card to the newly created card. The reissued card has the same PAN and PIN as the source card but a new expiration date and CVV2 number. <br> <br> **Note:** By default, the source card is automatically terminated. However, if your program is configured for multiple active cards, you can prevent the source card from being automatically terminated by setting the `activation_actions.terminate_reissued_source_card` field to false.| Existing card token. <br> <br> Issue a GET to /cards/user/{token} to retrieve card tokens for a particular user.
+| translate_pin_from_card_token | string | No | Copies the PIN from the specified card to the newly created card.  <br> <br> Both cards must belong to the same user. This field is not allowed if `reissue_pan_from_card_token` is set. | Existing card token. <br> <br> Issue a GET to /cards/user/{token} to retrieve card tokens for a particular user.
+| card_product_token | string | Yes | The unique identifier of the card product. | Existing card product token. <br> <br> Issue a GET to /cardproducts to retrieve card product tokens.
+| bulk_issuance_token | string | No | Associates the card with the specified bulk card order. **This field cannot be updated.** | 36 char max 
+| expedite | boolean | No | Set to `true` to request expedited processing and shipping of the card. Expedited orders ignore the setting of the`fulfillment.shipping.method` field and always ship by FedEx Priority mail. <br> <br> This expedited service is available only for cards fulfilled by [Perfect Plastic Printing](http://perfectplastic.com/) and [IDEMIA](http://www.idemia.com). For other fulfillment providers, set this field to `false`. <br> <br> **Note:** Contact Marqeta Customer Success for information regarding the cost of expedited service. | true &vert; false; <br> <br> Default: false
+| expiration_offset | object | No | Specifies the length of time for which the card is valid. In other words, the card expires this length of time after the date of issue. <br> <br> If not specified, the card uses the config.card\_life\_cycle.expiration\_offset of the card product. 
+| activation_actions | object | No | Defines actions to execute when the card is activated. The fields in this object are mutually exclusive.
+| metadata | object | No | Associates customer-injected metadata with the user.
+|===
+
+==== The activation_actions object
+
+|===
+| Name | Type | Required? | Description | Allowable Values
+
+| terminate\_reissued\_source\_card | boolean | No | If you are reissuing a card, the source card is terminated by default. To prevent the source card from being terminated, set this field to false. <br> <br> Only relevant when `reissue_pan_from_card_token` is set. | true &vert; false; <br> <br> Default: true
+| swap\_digital\_wallet\_tokens\_from\_card\_token | string | No | Moves all digital wallet tokens from the specified card to the new card.<br> <br> Not relevant when `reissue_pan_from_card_token` is set. | Existing card token. <br> <br> Issue a GET to /cards/user/{token} to retrieve card tokens for a particular user.
+|===
+
+==== The expiration_offset object
+
+|===
+| Name | Type | Required? | Description | Allowable Values
+
+| unit | string | No | Specifies the units for the `value` field.  | YEARS &vert; MONTHS &vert; DAYS &vert; HOURS &vert; MINUTES &vert; SECONDS <br> <br> Default: YEARS
+| value | integer | No | Specifies the number of time units (as defined by the `unit` field) that the card is valid. In other words, cards expire `value` x `unit` after the date of issue. <br><br> This number is rounded as follows: <br> <br> YEARS  – Rounds up to the last second of the last day of the month of expiration. For example, if the issue date is 1 Jan 2015 and `value`=1, the card expires on the last day of Jan 2016. <br> <br> MONTHS – Rounds up to the last second of the last day of the month of expiration. For example, if the issue date is 1 Jan 2015 and `value`=1, the card expires on the last day of Feb 2015. <br> <br> DAYS – Rounds up to the last second of the day of expiration. <br> <br> HOURS, MINUTES, SECONDS – No rounding. | Any positive integer <br> <br> Default: 4
+|===
+
+==== The fulfillment object
+
+|===
+| Name | Type | Required? | Description
+
+| card_personalization | object | No | Allows personalized attributes to be added to the card.
+| shipping | object | No | Specifies shipping details for the card.
+|===
+
+==== The fulfillment.shipping object
+
+|===
+| Name | Type | Required? | Description | Allowable Values
+
+| return_address | object | No | Address to which card will be returned if shipping fails. <br><br>For individual card orders: If no return_address is specified for the card, then the return_address for the card product is used. For an address to be valid for use, its address1, city, state, and postal_code fields must be populated. The country is assumed to be USA if the country field is unpopulated. |
+| recipient_address | object | No | Address to which card will be shipped. <br><br>For individual card orders: If no recipient\_address is specified for the card, then the recipient\_address for the user is used. If no recipient\_address is specified for the user, then the recipient\_address for the card product is used. For an address to be valid for use, its address1, city, state, and postal_code fields must be populated. The country is assumed to be USA if the country field is unpopulated. |
+| method | string | No | Specifies the shipping company and shipping service level. <br> <br> This field is ignored if your fulfillment provider is either Perfect Plastic Printing or IDEMIA and the `expedite` field is set to `true`. In this case, the shipping method is implicitly FEDEX_EXPEDITED. | Values allowed depend on your fulfillment provider. <br> <br> **Perfect Plastic Printing** and **IDEMIA:** <br> USPS_REGULAR&nbsp;&vert; FEDEX_EXPEDITED <br> <br> **Arroweye Solutions:** <br> UPS_REGULAR &vert; UPS_EXPEDITED &vert; USPS_REGULAR &vert; USPS_EXPEDITED
+| care_of_line | string | No | Adds the specified value as a C/O (care of) line to the mailing carrier. <br> <br> __Note:__ This field overrides the equivalent field on the associated card product. | 255 char max
+|===
+
+==== The fulfillment.shipping.return_address & recipient_address objects
+
+|===
+| Name | Type | Required? | Description | Allowable Values
+
+| address1 | string | No | Number and street. | 50 char max
+| address2 | string | No | Additional address information. | 50 char max 
+| city | string | No | City. | 50 char max
+| state | string | No | State. | 50 char max
+| postal_code | string | No | Postal code. | 50 char max
+| country  | string | No | Country. | 40 char max
+| phone | string | No | Telephone number. | 50 char max
+| first_name | string | No | First Name. | 50 char max
+| middle_name | string | No | Middle Name. | 50 char max
+| last_name | string | No | Last Name. | 50 char max
+|===
+
+==== The fulfillment.card_personalization object
+
+[NOTE]
+When the Marqeta platform fulfills an individual card order, card personalization attributes defined at the card level override matching attributes of the associated card product. 
+Contact your Marqeta Customer Success representative to make use of card personalization.
+
+|===
+| Name | Type | Required? | Description 
+
+| text | object | No | Specifies personalized text that appears on the card.
+| carrier | object | No | Specifies attributes of the card carrier (if your fulfillment provider is Arroweye Solutions).
+| images | object | No | Specifies personalized images that appear on the card (for individual card orders only). Also specifies attributes of the card carrier (if your fulfillment provider is Perfect Plastic Printing or IDEMIA).  
+|===
+
+==== The fulfillment.card_personalization.text object
+
+|===
+| Name | Type | Required? | Description | Allowable Values
+
+| name_line_1.value | string | No | First line of personalized text printed on the card. | The card can accommodate only 21 characters. Strings longer than 21 characters are truncated.
+| name_line_2.value | string | No | Second line of personalized text printed on the card. | The card can accommodate only 21 characters. Strings longer than 21 characters are truncated.
+|===
+
+==== The fulfillment.card_personalization.carrier object
+
+[NOTE]
+Use this carrier object if your fulfillment provider is Arroweye Solutions.
+
+|===
+| Name | Type | Required? | Description | Allowable Values
+
+| template_id | string | No | Specifies the card carrier template to use. | A card carrier template ID.
+| logo_file | string | No | Specifies an image to display on the card carrier. | Contains the name of the image file and must match the name of the file you send to your fulfillment provider.  
+| logo_thumbnail_file | string | No | Specifies a thumbnail-sized rendering of the image specified in the `logo_file` field. | Contains the name of the image file and must match the name of the file you send to your fulfillment provider.
+| message_file | string | No | Specifies a text file containing a custom message to print on the card carrier. | Contains the name of the text file and must match the name of the file you send to your fulfillment provider.
+|===
+
+==== The fulfillment.card_personalization.images object
+
+|===
+| Name | Type | Required? | Description | Allowable Values
+
+| card | object | No | Specifies personalized images that appear on the card. |
+| carrier | object | No | Specifies personalized images and text that appear on the card carrier (if your fulfillment provider is Perfect Plastic Printing or IDEMIA). |
+| signature.name | string | No | Specifies a PNG image of the card holder's signature. | Contains the name of the image file and must match the name of the file you send to your fulfillment provider.  <br> <br> Must end in `.png`.
+| carrier_return_window.name | string | No | Specifies a PNG image to display in the return-address window of envelopes used for sending cards to card holders. | Contains the name of the image file and must match the name of the file you send to your fulfillment provider.  <br> <br> Must end in `.png`.
+|===
+
+==== The fulfillment.card_personalization.images.card object
+
+|===
+| Name | Type | Required? | Description | Allowable Values
+
+| name | string | No | Specifies a PNG image to display on the card. | Contains the name of the image file and must match the name of the file you send to your fulfillment provider. <br> <br> Must end in `.png`.
+| thermal_color | string | No | Specifies the color of the image displayed on the card. | Contains the name of the color and must match one of the provider's predefined colors.  
+|===
+
+==== The fulfillment.card_personalization.images.carrier object
+
+[NOTE]
+Use this carrier object if your fulfillment provider is Perfect Plastic Printing or IDEMIA.
+
+|===
+| Name | Type | Required? | Description | Allowable Values
+
+| name | string | No | Specifies a PNG image to display on the card carrier. | Contains the name of the image file and must match the file you send to your fulfillment provider.  <br> <br> Must end in `.png`.
+| message\_1 | string | No | Specifies a custom message that appears on the card carrier. | 60 char max
+|===
+
+==== The metadata object
+
+|===
+| Name	| Type | Required? | Description | Allowable Values
+
+| _customer_defined_name_01_ | string | No | Associates customer-injected metadata with the card. The Marqeta customer defines the names and values of up to 20 fields, for example:<br><br><span class="code-font">"metadata": {<br>&nbsp;&nbsp;"my\_name\_1": "my\_value\_1",<br>&nbsp;&nbsp;"my\_name\_2": "my\_value\_2"<br>&nbsp;&nbsp;}</span> | Up to 20 name-value pairs. <br> <br> 255 char max per name; 255 char max per value.
+|===
+
+=== Card state and fulfillment status
+
+Every card object has state and fulfillment status fields that cannot be set directly using the /cards endpoint. 
+A card's state and physical order fulfillment status is managed either by the Marqeta platform or through the /cardtransitions endpoint (see Managing Lost, Stolen, or Damaged Cards). 
+
+==== Card state
+
+|===
+| State | Description 
+
+| UNACTIVATED |  The card has been created but is non-functional. This is the initial state of a card.
+| ACTIVE | The card is functional. A card can transition to an ACTIVE state only from an UNACTIVATED or SUSPENDED state. <br> <br>  This state can result from card activation (or re-activation from a SUSPENDED state) by Marqeta, Marqeta customer, or the card holder (see <a href="https://www.marqeta.com/api/docs/VhypzxwAANwA_Vgx/cards#create_card_transition"> Create Card Transition</a>).
+| SUSPENDED |  The card is temporarily non-functional. Refunds can still be completed while a card is suspended. A card can transition from ACTIVE to SUSPENDED and back to ACTIVE again. <br> <br> This state can result from card suspension by Marqeta, the Marqeta customer, or the card holder.
+| TERMINATED | The card is permanently non-functional and cannot transition to any other state. Refunds can still be completed after a card is terminated.<br> <br> This state can result from card termination by Marqeta, the Marqeta customer, or the card holder. Depending on your program settings, this state can also result from activation or re-activation of another card.
+|===
+
+==== Card fulfillment status
+
+|===
+| Status | Description
+
+| ISSUED | Initial state of all newly created/issued cards.
+| ORDERED | Card ordered through card fulfillment provider.
+| REORDERED | Card reordered through card fulfillment provider.
+| REJECTED | Card rejected by card fulfillment provider.
+| SHIPPED | Card shipped by card fulfillment provider.
+| DELIVERED | Card delivered by shipping provider.
+| DIGITALLY_PRESENTED | Card digitally presented using the /cards/{token}/showpan endpoint; does not affect the delivery of physical cards.
+|===
+
+=== Sample request body
+
+[source,json]
+{  
+    "token": "mytestcard01",  
+    "user_token": "my_user_01",  
+    "fulfillment": {    
+        "card_personalization": {      
+            "text": {          
+                "name_line_1": {            
+                    "value": "my line 1 text"          
+                },          
+                "name_line_2": {            
+                    "value": "my line 2 text"          
+                }      
+            },      
+            "images": {        
+                "card": {           
+                    "name": "my_card_logo.png",           
+                    "thermal_color": "Black"        
+                },        
+                "carrier": {          
+                    "name": "my_carrier_logo.png",          
+                    "message_1": "my message"
+                },        
+                "signature": {          
+                    "name": "my_signature.png"
+                },        
+                "carrier_return_window": {          
+                    "name": "my_return_address_image.png"
+                }
+            }
+        }
+    },  
+    "card_product_token": "red_cardproduct",  
+    "metadata": {    	
+        "key1":"value1",    	
+        "key2":"value2" 
+    }
+}
+
+=== Sample response body
+
+[source,json]
+{
+    "created_time": "2017-02-14T18:48:10Z",
+    "last_modified_time": "2017-02-14T18:48:10Z",
+    "token": "mytestcard01",
+    "user_token": "my_user_01",
+    "card_product_token": "red_cardproduct",
+    "last_four": "8949",
+    "pan": "111111______8949",
+    "expiration": "0221",
+    "expiration_time": "2021-02-28T23:59:59Z",
+    "barcode": "17469201908992951865",
+    "pin_is_set": false,
+    "state": "UNACTIVATED",
+    "state_reason": "New card",
+    "expedite": false,
+    "fulfillment_status": "ISSUED",
+    "fulfillment": {
+        "card_personalization": {
+            "text": {
+                "name_line_1": {
+                    "value": "my line 1 text"
+                },
+                "name_line_2": {
+                    "value": "my line 2 text"
+                }
+            },
+            "images": {
+                "card": {
+                    "name": "my_card_logo.png",
+                    "thermal_color": "Black"
+                },
+                "carrier": {
+                    "name": "my_carrier_logo.png",
+                    "message_1": "my message"
+                },
+                "signature": {
+                    "name": "my_signature.png"
+                },
+                "carrier_return_window": {
+                    "name": "my_return_address_image.png"
+                }
+            }
+        }
+    },
+    "instrument_type": "PHYSICAL_MSR",
+    "metadata": {
+        "key1": "value1",
+        "key2": "value2"
+    }
+}
+
+== Retrieve card
+
+*Action:* `GET` +
+*Endpoint:* `/cards/{token}`
+
+Retrieve a specific card.
+
+This endpoint supports field filtering and object expansion.
+
+=== URL path parameters
+
+|===
+| Name | Type | Required? | Description | Allowable Values
+
+| token | string | Yes | Identifies the card to retrieve. | Existing card token. <br> <br> Issue a `GET` to `/cards/user/{token}` to retrieve card tokens for a specific user.
+|===
+
+=== Sample response body
+
+[source,json]
+{
+    "created_time": "2017-02-14T18:48:10Z",
+    "last_modified_time": "2017-02-14T18:48:10Z",
+    "token": "mytestcard01",
+    "user_token": "my_user_01",
+    "card_product_token": "red_cardproduct",
+    "last_four": "8949",
+    "pan": "111111______8949",
+    "expiration": "0221",
+    "expiration_time": "2021-02-28T23:59:59Z",
+    "barcode": "17469201908992951865",
+    "pin_is_set": false,
+    "state": "UNACTIVATED",
+    "state_reason": "New card",
+    "expedite": false,
+    "fulfillment_status": "ISSUED",
+    "fulfillment": {
+        "card_personalization": {
+            "text": {
+                "name_line_1": {
+                    "value": "my line 1 text"
+                },
+                "name_line_2": {
+                    "value": "my line 2 text"
+                }
+            },
+            "images": {
+                "card": {
+                    "name": "my_card_logo.png",
+                    "thermal_color": "Black"
+                },
+                "carrier": {
+                    "name": "my_carrier_logo.png",
+                    "message_1": "my message"
+                },
+                "signature": {
+                    "name": "my_signature.png"
+                },
+                "carrier_return_window": {
+                    "name": "my_return_address_image.png"
+                }
+            }
+        }
+    },
+    "instrument_type": "PHYSICAL_MSR",
+    "metadata": {
+        "key1": "value1",
+        "key2": "value2"
+    }
+}
+
+== Update card
+
+*Action:* `PUT` +
+*Endpoint:* `/cards/{token}`
+
+Update the details of an existing card. For example, you can update an unactivated card in order to associate it with a different user.
+
+=== URL path parameters
+
+|===
+| Name | Type | Required? | Description | Allowable Values
+
+| token | string | Yes | Identifies the card to update. | Existing card token. <br> <br> Issue a GET to /cards/user/{token} to retrieve card tokens for a specific user. |
+|===
+
+=== Body field details
+
+|===
+| Name | Type | Required? | Description | Allowable Values
+
+| user_token | string | No | Specifies the user you want to associate with the card. | Existing user token. <br> <br> Issue a GET to /users to retrieve user tokens. |
+| expedite | boolean | No | Set to `true` to request expedited processing and shipping of the card. Expedited orders ignore the setting of the`fulfillment.shipping.method` field and always ship by FedEx Priority mail. <br> <br> This expedited service is available only for cards fulfilled by [Perfect Plastic Printing](http://perfectplastic.com/) and [IDEMIA](http://www.idemia.com). For other fulfillment providers, set this field to `false`. <br> <br> **Note:** Contact Marqeta Customer Success for information regarding the cost of expedited service. | true &vert; false; <br> <br> Default: false
+| fulfillment | object | No | Determines physical characteristics of a card and shipment information. || metadata | object | No | Associates customer-injected metadata with the card. |
+|===
+
+==== The fulfillment object
+
+|===
+| Name | Type | Required? | Description
+
+| card_personalization | object | No | Allows personalized attributes to be added to the card.
+| shipping | object | No | Specifies shipping details for the card.
+|===
+
+==== The fulfillment.shipping object
+
+|===
+| Name | Type | Required? | Description | Allowable Values
+
+| return_address | object | No | Address to which card will be returned if shipping fails. <br><br>For individual card orders: If no return_address is specified for the card, then the return_address for the card product is used. For an address to be valid for use, its address1, city, state, and postal_code fields must be populated. The country is assumed to be USA if the country field is unpopulated.| 
+| recipient_address | object | No | Address to which card will be shipped. <br><br>For individual card orders: If no recipient_address is specified for the card, then the recipient_address for the user is used. If no recipient_address is specified for the user, then the recipient_address for the card product is used. For an address to be valid for use, its address1, city, state, and postal_code fields must be populated. The country is assumed to be USA if the country field is unpopulated.|
+| method | string | No | Specifies the shipping company and shipping service level. <br> <br> This field is ignored if your fulfillment provider is either Perfect Plastic Printing or IDEMIA and the `expedite` field is set to `true`. In this case, the shipping method is implicitly FEDEX_EXPEDITED. | Values allowed depend on your fulfillment provider. <br> <br> **Perfect Plastic Printing** and **IDEMIA:** <br> USPS_REGULAR&nbsp;&vert; FEDEX_EXPEDITED <br> <br> **Arroweye Solutions:** <br> UPS_REGULAR &vert; UPS_EXPEDITED &vert; USPS_REGULAR &vert; USPS_EXPEDITED| 
+| care_of_line | string | No | Adds the specified value as a C/O (care of) line to the mailing carrier. <br> <br> __Note:__ This field overrides the equivalent field on the associated card product. | 255 char max
+|===
+
+==== The fulfillment.shipping.return_address & recipient_address objects
+
+|===
+| Name         | Type   | Required? | Description                     | Allowable Values
+
+| address1     | string | No        | Number and street.              | 50 char max
+| address2     | string | No        | Additional address information. | 50 char max 
+| city         | string | No        | City.                           | 50 char max
+| state        | string | No        | State.                          | 50 char max
+| postal_code  | string | No        | Postal code.                    | 50 char max
+| country      | string | No        | Country.                        | 40 char max
+| phone        | string | No        | Telephone number.               | 50 char max
+| first_name   | string | No        | First name.                     | 50 char max
+| middle_name  | string | No        | Middle name.                    | 50 char max
+| last_name    | string | No        | Last name.                      | 50 char max
+|===
+
+==== The fulfillment.card_personalization object
+
+[NOTE]
+When the Marqeta platform fulfills an individual card order, card personalization attributes defined at the card level override matching attributes of the associated card product. Contact your Marqeta Customer Success representative to make use of card personalization.
+
+|===
+| Name | Type | Required? | Description
+
+| text | object | No | Specifies personalized text that appears on the card.
+| carrier | object | No | Specifies attributes of the card carrier (if your fulfillment provider is Arroweye Solutions). 
+| images | object | No | Specifies personalized images that appear on the card (for individual card orders only). Also specifies attributes of the card carrier (if your fulfillment provider is Perfect Plastic Printing or IDEMIA).  
+|===
+
+===== The fulfillment.card_personalization.text object
+
+|===
+| Name | Type | Required? | Description | Allowable Values 
+
+| name\_line\_1.value | string | No | First line of personalized text printed on the card. | The card can accommodate only 21 characters. Strings longer than 21 characters are truncated.
+| name\_line\_2.value | string | No | Second line of personalized text printed on the card. | The card can accommodate only 21 characters. Strings longer than 21 characters are truncated.
+|===
+
+==== The fulfillment.card_personalization.carrier object
+
+[NOTE]
+Use this carrier object if your fulfillment provider is Arroweye Solutions.
+
+|===
+| Name | Type | Required? | Description | Allowable Values
+
+| template\_id | string | No | Specifies the card carrier template to use. | A card carrier template ID.
+| logo\_file | string | No | Specifies an image to display on the card carrier. | Contains the name of the image file and must match the name of the file you send to your fulfillment provider.  
+| logo\_thumbnail\_file | string | No | Specifies a thumbnail-sized rendering of the image specified in the `logo_file` field. | Contains the name of the image file and must match the name of the file you send to your fulfillment provider.
+| message\_file | string | No | Specifies a text file containing a custom message to print on the card carrier. | Contains the name of the text file and must match the name of the file you send to your fulfillment provider.
+|===
+
+==== The fulfillment.card_personalization.images object
+
+|===
+| Name | Type | Required? | Description | Allowable Values
+
+| card | object | No | Specifies personalized images that appear on the card. |
+| carrier | object | No | Specifies personalized images and text that appear on the card carrier (if your fulfillment provider is Perfect Plastic Printing or IDEMIA). |
+| signature.name | string | No | Specifies a PNG image of the card holder's signature. | Contains the name of the image file and must match the name of the file you send to your fulfillment provider.  <br> <br> Must end in `.png`.
+| carrier_return_window.name | string | No | Specifies a PNG image to display in the return-address window of envelopes used for sending cards to card holders. | Contains the name of the image file and must match the name of the file you send to your fulfillment provider.  <br> <br> Must end in `.png`.
+|===
+
+==== The fulfillment.card_personalization.images.card object
+
+|===
+| Name | Type | Required? | Description | Allowable Values
+
+| name | string | No | Specifies a PNG image to display on the card. | Contains the name of the image file and must match the name of the file you send to your fulfillment provider. <br> <br> Must end in `.png`.
+| thermal_color | string | No | Specifies the color of the image displayed on the card. | Contains the name of the color and must match one of the provider's predefined colors.  
+|===
+
+==== The fulfillment.card_personalization.images.carrier object
+
+[NOTE]
+Use this carrier object if your fulfillment provider is Perfect Plastic Printing or IDEMIA.
+
+|===
+| Name | Type | Required? | Description | Allowable Values
+
+| name | string | No | Specifies a PNG image to display on the card carrier. | Contains the name of the image file and must match the file you send to your fulfillment provider.  <br> <br> Must end in `.png`.
+| message_1 | string | No | Specifies a custom message that appears on the card carrier. | 60 char max
+|===
+
+==== The metadata object
+
+|===
+| Name	| Type | Required? | Description | Allowable Values
+
+| *customer\_defined\_name_01* <br> *customer\_defined\_name_02* <br> <br> ... <br> <br> *customer\_defined\_name_20* <br> <br> (255 char max per name) | string | No | Associates customer-injected metadata with the card. The Marqeta customer defines the names and values of up to 20 fields, for example: <br> <br> <span class="code-font">"metadata": {<br>&nbsp;&nbsp;"my\_name\_1": "my\_value\_1",<br>&nbsp;&nbsp;"my\_name\_2": "my\_value\_2"<br>&nbsp;&nbsp;}</span> <br> <br> The following samples show how to update, add, and delete fields. Existing fields are unaffected unless they are included in the request. <br> <br> Update a field's value: <br> <br> <span class="code-font">"metadata": {<br>&nbsp;&nbsp;"my\_name\_1": "my\_updated\_value"<br>&nbsp;&nbsp;}</span> <br> <br> Add a new field: <br> <br> <span class="code-font">"metadata": {<br>&nbsp;&nbsp;"my\_new\_field": "my\_value"<br>&nbsp;&nbsp;}</span> <br> <br> Delete an existing field: <br> <span class="code-font">"metadata": {<br>&nbsp;&nbsp;"my\_name\_1": null<br>&nbsp;&nbsp;}</span><br> | Up to 20 name-value pairs. <br> <br> 255 char max per name; 255 char max per value
+|===
+
+=== Sample request body
+
+[source,json]
+{
+    "user_token": "my_user_03"
+}
+
+=== Sample response body
+
+[source,json]
+{
+    "created_time": "2017-02-14T18:48:10Z",
+    "last_modified_time": "2017-02-14T19:03:04Z",
+    "token": "mytestcard01",
+    "user_token": "my_user_03",
+    "card_product_token": "red_cardproduct",
+    "last_four": "8949",
+    "pan": "111111______8949",
+    "expiration": "0221",
+    "expiration_time": "2021-02-28T23:59:59Z",
+    "barcode": "17469201908992951865",
+    "pin_is_set": false,
+    "state": "UNACTIVATED",
+    "state_reason": "New card",
+    "expedite": false,
+    "fulfillment_status": "ISSUED",
+    "fulfillment": {
+        "shipping": {
+            "method": "FEDEX_EXPEDITED",
+            "return_address": {
+                "address1": "123 Henry St",
+                "address2": "Suite 101",
+                "city": "Porterville",
+                "state": "CA",
+                "postal_code": "93257",
+                "country": "USA",
+                "phone": "831-555-5555",
+                "first_name": "Saki",
+                "middle_name": "R",
+                "last_name": "Dogger"
+            },
+            "recipient_address": {
+                "address1": "1000 Pacific Ave",
+                "city": "Santa Lucia",
+                "state": "WA",
+                "postal_code": "00112",
+                "country": "USA",
+                "phone": "345-123-9876",
+                "first_name": "Big",
+                "last_name": "Bird"
+            }
+        },
+        "card_personalization": {
+            "text": {
+                "name_line_1": {
+                    "value": "my line 1 text"
+                },
+                "name_line_2": {
+                    "value": "my line 2 text"
+                }
+            },
+            "images": {
+                "card": {
+                    "name": "my_card_logo.png",
+                    "thermal_color": "Black"
+                },
+                "carrier": {
+                    "name": "my_carrier_logo.png",
+                    "message_1": "my message"
+                },
+                "signature": {
+                    "name": "my_signature.png"
+                },
+                "carrier_return_window": {
+                    "name": "my_return_address_image.png"
+                }
+            }
+        }
+    },
+    "instrument_type": "PHYSICAL_MSR",
+    "metadata": {
+        "key1": "value1"
+    }
+}
+
+== List cards for users
+
+*Action:* `GET` +
+*Endpoint:* `/cards/user/{token}`
+
+List cards associated with a specific user. 
+
+This endpoint supports field filtering, pagination, and object expansion.
+
+=== URL path parameters
+
+|===
+| Name | Type | Required? | Description | Allowable Values
+
+| token | string | Yes | Identifies the user whose cards you want to list. | Existing user token. Issue a GET to /users to retrieve user tokens.
+|===
+
+=== Sample response body
+
+[source,json]
+{
+    "count": 3,
+    "start_index": 0,
+    "end_index": 2,
+    "is_more": false,
+    "data": [
+        {
+            "created_time": "2016-10-24T21:23:31Z",
+            "last_modified_time": "2017-01-12T19:55:09Z",
+            "token": "my_user_01_card_01",
+            "user_token": "my_user_01",
+            "card_product_token": "blue_cardproduct",
+            "last_four": "2160",
+            "pan": "111111______2160",
+            "expiration": "1026",
+            "expiration_time": "2026-10-31T23:59:59Z",
+            "barcode": "11379418395311581864",
+            "pin_is_set": false,
+            "state": "SUSPENDED",
+            "state_reason": "I don't want to use this card, so suspend it.",
+            "expedite": false,
+            "fulfillment_status": "ISSUED",
+            "instrument_type": "PHYSICAL_MSR"
+        },
+        {
+            "created_time": "2016-12-28T18:31:23Z",
+            "last_modified_time": "2016-12-28T18:31:23Z",
+            "token": "my_user_01_card_02",
+            "user_token": "my_user_01",
+            "card_product_token": "red_cardproduct",
+            "last_four": "0865",
+            "pan": "111111______0865",
+            "expiration": "1220",
+            "expiration_time": "2020-12-31T23:59:59Z",
+            "barcode": "25815105237561780909",
+            "pin_is_set": false,
+            "state": "UNACTIVATED",
+            "state_reason": "New card",
+            "expedite": false,
+            "fulfillment_status": "ISSUED",
+            "fulfillment": {
+                "shipping": {
+                    "method": "FEDEX_REGULAR",
+                    "care_of_line": "my_care_of_value"
+                }
+            },
+            "instrument_type": "PHYSICAL_MSR"
+        },
+        {
+            "created_time": "2016-11-03T21:55:08Z",
+            "last_modified_time": "2016-11-03T21:55:08Z",
+            "token": "my_user-01-child_01_card_01",
+            "user_token": "my_user-01-child_01",
+            "card_product_token": "blue_cardproduct",
+            "last_four": "2810",
+            "pan": "111111______2810",
+            "expiration": "1126",
+            "expiration_time": "2026-11-30T23:59:59Z",
+            "barcode": "63143403984499099324",
+            "pin_is_set": false,
+            "state": "UNACTIVATED",
+            "state_reason": "New card",
+            "expedite": false,
+            "fulfillment_status": "ISSUED",
+            "instrument_type": "PHYSICAL_MSR"
+        }
+    ]
+}
+
+== Retrieve card by PAN
+
+Action: POSTEndpoint: /cards/getbypan
+
+{"api": "cards","endpoint": "/cards/getbypan","method": "post","cp_id": "1","bc_id": "1"}
+
+Retrieve the user_token and card_token for a PAN (card number). In the case of a reissued card, where multiple cards share the same PAN, the information for the most recently issued card is returned. 
+
+This call is useful in IVR scenarios where a user has telephoned and identifies the card by the PAN. The retrieval of these tokens is implemented as a POST call because supplying the PAN in the request body is more secure than supplying it in the URL (as would be required with a GET).
+
+Body field details
+
+| Name | Type | Required? | Description | Allowable Values || --- | --- | --- | --- | --- || pan | string | Yes | The PAN of the card whose information you want to retrieve. | 16 char max. <br> <br> Issue a GET to /cards/{token}/showpan to retrieve the PAN for a specific card. || cvv_number | string | No | The three digit card verification value (CVV2) included on the back of the card. <br> <br> This value is not updateable. | 3 char max || expiration | string | No | Card expiration date. | mmyy |
+
+Sample request body
+
+{    "pan": "5454545454545454"}
+
+Sample response body
+
+{    "user_token": "my_user",    "card_token": "my_card1"}
