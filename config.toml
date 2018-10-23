@@ -1,5 +1,4 @@
-ignorefiles = [ "guides/snippets" ]
-ignorefiles = [ "core/cards/cards_endpoints" ]
+ignorefiles = [ "guides/snippets", "core/cards/cards_endpoints" ]
 
 baseURL = "https://zen-ardinghelli-342594.netlify.com"
 languageCode = "en-us"
