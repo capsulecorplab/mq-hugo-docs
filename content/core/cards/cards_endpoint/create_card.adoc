@@ -1,3 +1,5 @@
+:sampledir: content/core/cards/cards_samples
+
 == Create card
 
 *Action:* `POST` +
@@ -207,9 +209,9 @@ A card's state and physical order fulfillment status is managed either by the Ma
 === Sample request body
 
 [source,json]
-include::create_card_request.json[]
+include::{sampledir}/create_card_request.json[]
 
 === Sample response body
 
 [source,json]
-include::create_card_response.json[]
+include::{sampledir}/create_card_response.json[]

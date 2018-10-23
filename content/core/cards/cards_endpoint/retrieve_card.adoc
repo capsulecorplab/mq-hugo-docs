@@ -1,3 +1,5 @@
+:sampledir: content/core/cards/cards_samples
+
 == Retrieve card
 
 *Action:* `GET` +
@@ -18,4 +20,4 @@ This endpoint supports field filtering and object expansion.
 === Sample response body
 
 [source,json]
-include::retrieve_card_response.json[]
+include::{sampledir}/retrieve_card_response.json[]
