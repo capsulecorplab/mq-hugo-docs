@@ -3,6 +3,7 @@ title = "Controlling Spending"
 +++
 
 = Controlling Spending
+:outfilesuffix: /
 
 The Marqeta platform enables you to create controls for limiting user spending. 
 A user represents the card holder to whom one or more cards may be associated. 

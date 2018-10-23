@@ -3,6 +3,7 @@ title = "About Cards"
 +++
 
 = About Cards
+:outfilesuffix: /
 
 Refer to <</guides/quick_start.adoc#basic-concepts, Quick Start > Basic Concepts>> for more information.
 
@@ -16,7 +17,7 @@ Your application calls the Marqeta API to issue and manage cards.
 The Marqeta platform enables you to customize a card's attributes, behaviors, and lifecycle, including limits on spending, the number of card uses, and the number of active cards.
 
 [TIP]
-For the complete /cards endpoint reference, see the Cards page.
+For the complete `/cards` endpoint reference, see the <</core/cards/cards.adoc#_cards, Cards>> page.
 
 At the end of the guide, you should understand:
 
