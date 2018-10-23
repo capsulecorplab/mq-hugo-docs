@@ -1,5 +1,5 @@
 = Also Cards
-:includedir: cards_endpoints
+:includedir: ../cards/cards_endpoints
 
 include::{includedir}/create_card.adoc[]
 
