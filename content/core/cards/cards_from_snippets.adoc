@@ -1,5 +1,9 @@
++++
+title = "Also Cards"
++++
+
 = Also Cards
-:includedir: ../cards/cards_endpoints
+:includedir: content/core/cards/cards_endpoints
 
 include::{includedir}/create_card.adoc[]
 
