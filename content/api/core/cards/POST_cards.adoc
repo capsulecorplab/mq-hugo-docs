@@ -37,9 +37,9 @@ Note that if show_pan and show_cvv_number are set to "true", the fulfillment sta
 | card_product_token | string | Yes | The unique identifier of the card product. | Existing card product token. <br> <br> Issue a GET to /cardproducts to retrieve card product tokens.
 | bulk_issuance_token | string | No | Associates the card with the specified bulk card order. **This field cannot be updated.** | 36 char max 
 | expedite | boolean | No | Set to `true` to request expedited processing and shipping of the card. Expedited orders ignore the setting of the`fulfillment.shipping.method` field and always ship by FedEx Priority mail. <br> <br> This expedited service is available only for cards fulfilled by [Perfect Plastic Printing](http://perfectplastic.com/) and [IDEMIA](http://www.idemia.com). For other fulfillment providers, set this field to `false`. <br> <br> **Note:** Contact Marqeta Customer Success for information regarding the cost of expedited service. | true &vert; false; <br> <br> Default: false
-| expiration_offset | object | No | Specifies the length of time for which the card is valid. In other words, the card expires this length of time after the date of issue. <br> <br> If not specified, the card uses the config.card\_life\_cycle.expiration\_offset of the card product. 
-| activation_actions | object | No | Defines actions to execute when the card is activated. The fields in this object are mutually exclusive.
-| metadata | object | No | Associates customer-injected metadata with the user.
+| expiration_offset | object | No | Specifies the length of time for which the card is valid. In other words, the card expires this length of time after the date of issue. <br> <br> If not specified, the card uses the config.card\_life\_cycle.expiration\_offset of the card product. |
+| activation_actions | object | No | Defines actions to execute when the card is activated. The fields in this object are mutually exclusive. |
+| metadata | object | No | Associates customer-injected metadata with the user. |
 |===
 
 ==== The activation_actions object

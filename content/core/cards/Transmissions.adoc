@@ -21,4 +21,3 @@ By default, the link expires 48 hours after creation and can only be accessed th
 If you are interested in using this feature, contact your Marqeta Customer Success representative for more information.
 
 include::{endpointdir}/POST_transmissions.adoc[]
-

@@ -1,8 +1,8 @@
 +++
-title = "Also Cards"
+title = "Cards"
 +++
 
-= Also Cards
+= Cards
 :endpointdir: content/api/core/cards
 :outfilesuffix: /
 

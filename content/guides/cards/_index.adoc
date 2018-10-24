@@ -1,6 +1,4 @@
 +++
 title = "Cards"
 weight = 30
-type = "category_home"
-layout = "category_home"
 +++
