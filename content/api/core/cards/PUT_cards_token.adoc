@@ -1,5 +1,3 @@
-:sampledir: ../cards_samples
-
 == Update card
 
 *Action:* `PUT` +
@@ -141,9 +139,9 @@ Use this carrier object if your fulfillment provider is Perfect Plastic Printing
 === Sample request body
 
 [source,json]
-include::{sampledir}/update_card_request.json[]
+include::PUT_cards_token_request.json[]
 
 === Sample response body
 
 [source,json]
-include::{sampledir}/update_card_response.json[]
+include::PUT_cards_token_response.json[]
