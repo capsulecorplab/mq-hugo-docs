@@ -4,7 +4,7 @@ baseURL = "https://zen-ardinghelli-342594.netlify.com"
 languageCode = "en-us"
 title = "Marqeta Dev"
 
-theme = "hugo-theme-learn"
+theme = "kube-master"
 
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
