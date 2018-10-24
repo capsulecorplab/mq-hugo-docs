@@ -14,8 +14,8 @@ Cards are derived from and controlled by a card product.
 [NOTE]
 For an overview of cards and the card object, see <</guides/cards/about_cards#_cards_in_the_payments_ecosystem, About Cards>>.
 
-include::{endpointdir}/create_card.adoc[]
+include::{endpointdir}/POST_cards.adoc[]
 
-include::{endpointdir}/retrieve_card.adoc[]
+include::{endpointdir}/GET_cards_token.adoc[]
 
-include::{endpointdir}/update_card.adoc[]
+include::{endpointdir}/PUT_cards_token.adoc[]
