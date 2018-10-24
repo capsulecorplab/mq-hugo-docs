@@ -3,7 +3,7 @@ title = "Transmissions"
 +++
 
 = Transmissions
-:endpointdir: content/api/core/transmissions/transmissions_endpoints
+:endpointdir: content/api/core/transmissions
 :outfilesuffix: /
 
 Use the `/transmissions` endpoint to send payment information to a recipient securely by email or fax. 
@@ -21,3 +21,4 @@ By default, the link expires 48 hours after creation and can only be accessed th
 If you are interested in using this feature, contact your Marqeta Customer Success representative for more information.
 
 include::{endpointdir}/POST_transmissions.adoc[]
+

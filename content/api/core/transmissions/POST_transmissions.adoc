@@ -1,6 +1,4 @@
-:sampledir: ../transmissions_samples
-
-== Create and send transmission
+== Create and send transmissions
 
 *Action:* `POST` +
 *Endpoint:* `/transmissions`
@@ -68,9 +66,9 @@ Submit a GET to `/transmissions/{token}` to retrieve the transmission record and
 === Sample request body
 
 [source,json]
-include::{sampledir}/create_and_send_transmission_request.json[]
+include::POST_transmissions_request.json[]
 
 === Sample response body
 
 [source,json]
-include::{sampledir}/create_and_send_transmission_response.json[]
+include::POST_transmissions_request.json[]

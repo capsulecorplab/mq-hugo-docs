@@ -1,4 +1,4 @@
-:sampledir: ../cards_samples
+:sampledir: /
 
 == Create card
 
