@@ -1,5 +1,3 @@
-:sampledir: ../cards_samples
-
 == Create card
 
 *Action:* `POST` +
@@ -203,15 +201,15 @@ A card's state and physical order fulfillment status is managed either by the Ma
 | REJECTED | Card rejected by card fulfillment provider.
 | SHIPPED | Card shipped by card fulfillment provider.
 | DELIVERED | Card delivered by shipping provider.
-| DIGITALLY_PRESENTED | Card digitally presented using the /cards/{token}/showpan endpoint; does not affect the delivery of physical cards.
+| DIGITALLY_PRESENTED | Card digitally presented using the `/cards/{token}/showpan` endpoint; does not affect the delivery of physical cards.
 |===
 
 === Sample request body
 
 [source,json]
-include::{sampledir}/create_card_request.json[]
+include::POST_cards_request.json[]
 
 === Sample response body
 
 [source,json]
-include::{sampledir}/create_card_response.json[]
+include::POST_cards_response.json[]

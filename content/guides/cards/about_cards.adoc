@@ -5,8 +5,6 @@ title = "About Cards"
 = About Cards
 :outfilesuffix: /
 
-Refer to <</guides/quick_start.adoc#basic-concepts, Quick Start > Basic Concepts>> for more information.
-
 A card is a payment device that enables a user to conduct transactions at merchants.
 Cards can be physical or virtual.
 You can also tokenize cards for use in digital wallets.
@@ -33,16 +31,16 @@ When the merchant has the card data, they can attempt to complete the transactio
 
 Cards store multiple pieces of data necessary to complete a transaction, including the following:
 
-- Name – card holder's name.
-- Primary account number (PAN) – unique identifier that appears on the front of the card; identifies the card network, issuing bank, and card holder account.
-- Expiration date – date when the card expires.
-- Card verification value (CVV2) – verification number that appears on the back of the card, usually used for “card not present” transactions. Some card networks refer to this as the card verification code (CVC).
+- *Name* – card holder's name.
+- *Primary account number (PAN)* – unique identifier that appears on the front of the card; identifies the card network, issuing bank, and card holder account.
+- *Expiration date* – date when the card expires.
+- *Card verification value (CVV2)* – verification number that appears on the back of the card, usually used for “card not present” transactions. Some card networks refer to this as the *card verification code (CVC)*.
 
-Some cards, including EMV "chip and PIN" cards, also require a personal identification number (PIN). You can also choose to enable the PIN feature, whether it is required or not. If a PIN is required or you opt to enable it, you must provide the card holder a method of setting the PIN. Available methods include the following:
+Some cards, including EMV "chip and PIN" cards, also require a *personal identification number (PIN)*. You can also choose to enable the PIN feature, whether it is required or not. If a PIN is required or you opt to enable it, you must provide the card holder a method of setting the PIN. Available methods include the following:
 
 - An iframe widget that injects a PIN-setting tool into your webpage or web application.
 - Over the phone, using an interactive voice response (IVR) system.
-- The /pins endpoint of the Marqeta API.
+- The `/pins` endpoint of the Marqeta platform.
 
 [NOTE]
 Funds are not loaded onto or directly associated with a card.
@@ -71,7 +69,10 @@ For example, you can issue a physical card to enable a delivery service to make 
 For example, you can issue a virtual card to make a payment to a retailer after the user signs up for an alternative lending payment plan. The lender can add the necessary funds to an account and create a new one-time-use virtual card to provide payment to the retailer.
 |===
 
-You can also provision digital wallet tokens for use in digital wallets like Apple Pay and Google Pay. Digital wallets enable users to make in-store and online payments using any device storing their tokenized card. Each token is based on an existing physical or virtual card. For more information on tokenization and digital wallets, see Digital Wallets and Tokenization.
+You can also provision digital wallet tokens for use in digital wallets like Apple Pay and Google Pay. 
+Digital wallets enable users to make in-store and online payments using any device storing their tokenized card. 
+Each token is based on an existing physical or virtual card. 
+For more information on tokenization and digital wallets, see Digital Wallets and Tokenization.
 
 === Single- vs. multi-use cards
 
@@ -80,28 +81,31 @@ You can configure a card to be usable once or multiple times.
 - A single-use card only functions for one transaction, after which the Marqeta platform terminates the card.
 - A multi-use card functions for multiple transactions, usually until the expiration date is reached.
 
-NOTE: You can create a single-use card by applying a velocity control. A velocity control specifies how much and how frequently a user can spend their funds. For more information on setting up a single-use card, see the Controlling Spending page.
+[NOTE]
+You can create a single-use card by applying a velocity control. A velocity control specifies how much and how frequently a user can spend their funds. For more information on setting up a single-use card, see the Controlling Spending page.
 
 === Number of cards
 
-You can set the number of active or suspended cards each user can own. The following card ownership scenarios are possible:
+You can set the number of active or suspended cards each user can own. 
+The following card ownership scenarios are possible:
 
 - Each user can own a single active or suspended card.
 - Each user can own multiple active or suspended cards that share the same PAN (by reissuing an existing card).
 - Each user can own multiple active or suspended cards with one or more PANs (by issuing original cards or reissuing existing cards).
 
-For information on creating original cards and reissuing existing cards, see "Issuance and reissuance".
+For information on creating original cards and reissuing existing cards, see <<Issuance and reissuance>>.
 
 == The card object
 
-The card object is a first-class object that represents a payment card issued by Marqeta. The card object stores details about the card, including the card number and security code.
+The `card` object is a first-class object that represents a payment card issued by Marqeta. The `card` object stores details about the card, including the card number and security code.
 
 Each card has an associated card product object and a user object.
 
-- The cardproduct object is a first-class object that defines attributes and behaviors for all associated cards. The card product operates like a template when creating new cards, but the association continues—updating the card product affects each associated card throughout the card's lifetime. Your program needs at least one card product before you can create a new card. You will work with Marqeta to create new card products in the production environment.
-- The user object is a first-class object that represents a current or potential card holder. In addition to storing details like name, address, and phone number, a user also represents an account to which funds can be added, and from which funds are drawn at transaction time.
+- The `cardproduct` object is a first-class object that defines attributes and behaviors for all associated cards. The card product operates like a template when creating new cards, but the association continues—updating the card product affects each associated card throughout the card's lifetime. Your program needs at least one card product before you can create a new card. You will work with Marqeta to create new card products in the production environment.
+- The `user` object is a first-class object that represents a current or potential card holder. In addition to storing details like name, address, and phone number, a user also represents an account to which funds can be added, and from which funds are drawn at transaction time.
 
-NOTE: Each user can have a parent user and one or more child users associated with it. If configured, funds held in a parent user account can be drawn from using a child user's card. The parent account can also be a business account—businesses are never a child to a user account. The business object can have associated fundingsource objects, but it cannot have an associated card object.
+[NOTE]
+Each user can have a parent user and one or more child users associated with it. If configured, funds held in a parent user account can be drawn from using a child user's card. The parent account can also be a business account—businesses are never a child to a user account. The business object can have associated fundingsource objects, but it cannot have an associated card object.
 
 The attributes of a card product answer the following questions about cards:
 
