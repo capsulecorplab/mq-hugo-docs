@@ -1,0 +1,8 @@
+{{ range $section, $taxonomy := .Site.Sections }}
+<h2>{{ .Title }}</h2>
+<ul>
+    {{ range $taxonomy.Pages }}
+    <li><a href="{{ .Permalink}}"> {{ .LinkTitle }} </a> </li>
+    {{ end }}
+</ul>
+{{ end }}

@@ -1,5 +1,6 @@
 +++
 title = "Developers"
+hideSidebar = true
 +++
 
 # BUILD WITH MARQETA
