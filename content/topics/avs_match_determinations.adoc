@@ -5,7 +5,8 @@ If the merchant does not provide address data in the transaction message, the Ma
 
 If you enable AVS for a given transaction type, and the merchant includes the address data of the card holder, the Marqeta platform's transaction record includes the purchaser-provided address, the Marqeta platform's on-file address, and the Marqeta platform's match determination, which indicates whether the two street addresses and postal codes match.
 
-Multiple resources on the Marqeta platform can contain the on-file address data. AVS checks the following objects for an on-file address, listed in priority order:
+Multiple resources on the Marqeta platform can contain the on-file address data. 
+AVS checks the following objects for an on-file address, listed in priority order:
 
 - The `user` object that represents the card holder.
 - The parent `user` object associated with the card holder.
