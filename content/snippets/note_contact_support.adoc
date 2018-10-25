@@ -1,6 +1,4 @@
 [NOTE]
 ====
 If you are interested in using this feature, contact your Marqeta Customer Success representative for more information.
-
-Also important -- this note was inherited from another document.
 ====

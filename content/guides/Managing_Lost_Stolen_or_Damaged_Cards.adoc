@@ -1,5 +1,6 @@
 +++
 title = "Managing Lost, Stolen, or Damaged Cards"
+categories = ["Cards"]
 +++
 
 = Managing Lost, Stolen, or Damaged Cards
@@ -29,7 +30,8 @@ In the request, set both the `translate_pin_from_card_token` and `activation_act
 You must also set the `required user_token` and `card_product_token` fields to appropriate values. 
 Note that the digital wallet tokens are not reassigned until the replacement card is activated.
 
-*To terminate a digital wallet token:* Issue a `POST` request to the `/digitalwallettokentransitions` endpoint and set the state field to TERMINATED.
+*To terminate a digital wallet token:* 
+Issue a `POST` request to the `/digitalwallettokentransitions` endpoint and set the state field to TERMINATED.
 
 == Card lost
 
@@ -40,15 +42,22 @@ Issue a `POST` request to the `/cardtransitions` endpoint and set the state fiel
 
 Suspending a card suspends all cards that have the same PAN but does not suspend associated digital wallet tokens (every token has a unique PAN).
 
-*To suspend a digital wallet token:* Issue a `POST` request to the `/digitalwallettokentransitions` endpoint and set the state field to SUSPENDED.
+*To suspend a digital wallet token:* 
+Issue a `POST` request to the `/digitalwallettokentransitions` endpoint and set the state field to SUSPENDED.
 
-*To reactivate a suspended card or digital wallet token:* Issue a `POST` request to the same endpoint used for suspending it and set the state field to ACTIVE.
+*To reactivate a suspended card or digital wallet token:* 
+Issue a `POST` request to the same endpoint used for suspending it and set the state field to ACTIVE.
 
 == Card damaged
 
-If a card is damaged, reissue the card. A reissued card has the same PAN as the old card but a new CVV2 and expiration date. The damaged card does not need to be suspended or terminated immediately.
+If a card is damaged, reissue the card. 
+A reissued card has the same PAN as the old card but a new CVV2 and expiration date. 
+The damaged card does not need to be suspended or terminated immediately.
 
-*To reissue a card:* Issue a POST request to the /cards endpoint and set the reissue_pan_from_card_token field to the value of the old card's token field. This action creates a new card with the same PAN as the old card but with a new CVV2 and new expiration date. All associated digital wallet tokens are reassigned to the new card when it's activated.
+*To reissue a card:* 
+Issue a `POST` request to the `/cards` endpoint and set the `reissue_pan_from_card_token` field to the value of the old card's `token` field. 
+This action creates a new card with the same PAN as the old card but with a new CVV2 and new expiration date. 
+All associated digital wallet tokens are reassigned to the new card when it's activated.
 
 [NOTE]
 ====

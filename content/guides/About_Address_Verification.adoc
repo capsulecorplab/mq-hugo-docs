@@ -1,5 +1,7 @@
 +++
 title = "About Address Verification"
+categories = ["Cards"]
+tags = ["Cards", "AVS", "Identity Verification"]
 +++
 
 = About Address Verification

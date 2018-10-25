@@ -1,6 +1,7 @@
 +++
 title = "Quick Start"
 weight = 10
+categories = ["Getting Started"]
 +++
 
 // This doesn't show up, does it?
@@ -10,7 +11,7 @@ WARNING: I've made an arbitrary addition to this page so that there is something
 Marqeta provides its customers with a sandbox environment in order to aquaint them with the Marqeta API. 
 The sandbox allows customers to create the objects required to conduct financial transactions and to then simulate transactions using those objects.
 
-include::content/guides/snippets/note_contact_support.adoc[]
+include::content/snippets/note_contact_support.adoc[]
 
 This page walks you through the simplest and most basic setup that allows for simulating transactions.
 In brief, you will learn how to access the sandbox, create four objects (a card product, a funding source, a user, and a card), fund the user's account, and then simulate a transaction.
@@ -20,7 +21,7 @@ In a more complex scenario, you might choose instead to employ Just-In-Time Fund
 This page also instructs customers on how to configure the sandbox environment to send webhook notifications in response to transaction events.
 
 [#basic-concepts]
-## Basic concepts
+== Basic concepts
 
 The fundamental purpose of the Marqeta API is to issue payment cards and customize card behavior.
 In a production environment, cards are used to pay merchants for goods and services.
@@ -42,5 +43,3 @@ For example, to create a new user object you would send a `POST` request to `/us
 
 `POST` and `PUT` requests usually require you to pass data in the message body to define the attributes of the object being created or updated.
 This data must be in JSON format.
-
-This is an additional line I'm adding.
