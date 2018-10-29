@@ -29,7 +29,7 @@ Note that if show_pan and show_cvv_number are set to "true", the fulfillment sta
 |===
 | Name | Type | Required? | Description | Allowable Values
 
-| token | string | No | The unique identifier of the card. <br> <br> If you do not include a token, the system will generate one automatically. This token is necessary for use in other API calls, so we recommend that rather than let the system generate one, you use a simple string that is easy to remember. **This value cannot be updated.** | 36 char max
+include::/content/snippets/core_field_token.adoc[]
 | user_token | string | Yes | The unique identifier of the authorized user of the card. | Existing user token. <br> <br> Issue a GET to /users to retrieve user tokens.
 | fulfillment |object |No | Determines physical characteristics of a card and shipment information. |
 | reissue_pan_from_card_token | string | No | Reissues the specified card (known as the _source_ card). <br> <br> This field reissues a card by copying the PAN and PIN from the specified source card to the newly created card. The reissued card has the same PAN and PIN as the source card but a new expiration date and CVV2 number. <br> <br> **Note:** By default, the source card is automatically terminated. However, if your program is configured for multiple active cards, you can prevent the source card from being automatically terminated by setting the `activation_actions.terminate_reissued_source_card` field to false.| Existing card token. <br> <br> Issue a GET to /cards/user/{token} to retrieve card tokens for a particular user.

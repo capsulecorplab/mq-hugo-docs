@@ -1,0 +1,5 @@
+| token | string | No | The unique identifier of the {object}.
+
+If you do not include a token, the system generates one automatically. Because `token` is required in other API calls, we recommend you define your tokens so they are easy to remember. 
+
+*This value cannot be updated.* | 36 char max

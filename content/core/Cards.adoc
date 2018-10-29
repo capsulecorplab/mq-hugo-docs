@@ -5,6 +5,7 @@ title = "Cards"
 = Cards
 :endpointdir: content/api/core/cards
 :outfilesuffix: /
+:object: card
 
 The cards resource represents the payment cards with which users conduct transactions. 
 Cards are owned by users and communicate with the Marqeta platform over card networks such as Discover, Mastercard, and Visa. 
