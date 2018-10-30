@@ -22,15 +22,4 @@ By default, the link expires 48 hours after creation and can only be accessed th
 [NOTE]
 If you are interested in using this feature, contact your Marqeta Customer Success representative for more information.
 
-include::{endpointdir}/POST_transmissions.adoc[]
-
-
-[source,json]
-----
-{
-    "token": "boo",
-    "transmission_method": "EMAIL",
-    "card_token": "e02cf1fa-75a5-48ab",
-    "transmission_attempt_count": 1
-}
-----
+include::content/api/core/transmissions/POST_transmissions.adoc[]

@@ -21,7 +21,7 @@ The following image shows a sample email transmission:
 |===
 | Name | Type | Required? | Description | Allowable Values
 
-include::/content/snippets/core_field_token.adoc[]
+include::../_snippets/core_field_token.adoc[]
 | transmission_method | string | Yes | The channel by which a transmission is sent. | EMAIL &vert; FAX 
 | card_token | string | Yes | The token that identifies the single-use virtual card to include in the transmission. | An existing single-use virtual card token. <br> <br> Submit a GET to /cards/user/{token} to retrieve card tokens for a particular user. 
 | fax_recipient | string | No | The fax number of the intended recipient. <br> <br> Required if transmission_method is FAX. |  Format your fax number as +(country code)(area code)(fax number) with no spaces or hyphens. For example, +1231231234. 
