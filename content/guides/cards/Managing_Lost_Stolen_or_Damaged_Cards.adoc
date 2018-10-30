@@ -35,7 +35,7 @@ Issue a `POST` request to the `/digitalwallettokentransitions` endpoint and set 
 
 == Card lost
 
-If a card is lost, you should either suspend or terminate it. To learn about card terminations, refer to the <<Card Stolen>> section.
+If a card is lost, you should either suspend or terminate it. To learn about card terminations, refer to the <<Card stolen>> section.
 
 *To suspend a card:*
 Issue a `POST` request to the `/cardtransitions` endpoint and set the state field to SUSPENDED.
