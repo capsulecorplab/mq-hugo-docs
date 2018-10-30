@@ -96,3 +96,15 @@ h3{
     max-width: 1100px;
     margin: 0 auto;
 }
+
+.nav-body {
+    font-size: .93 rem;
+}
+
+.sidebar-item.current-page {
+    font-weight: bold; 
+}
+
+.sidebar-item.current-page > a {
+    color: #130959;
+}

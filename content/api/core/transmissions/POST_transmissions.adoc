@@ -17,10 +17,11 @@ The following image shows a sample email transmission:
 
 === Body field details
 
+[cols="10,10,10,50,20"]
 |===
 | Name | Type | Required? | Description | Allowable Values
 
-| token | string | No | The unique identifier of the transmission. <br> <br> If you do not include a token, the system will generate one automatically. This token is necessary for use in other API calls. <b>This value cannot be updated</b>. | 36 char max 
+include::/content/snippets/core_field_token.adoc[]
 | transmission_method | string | Yes | The channel by which a transmission is sent. | EMAIL &vert; FAX 
 | card_token | string | Yes | The token that identifies the single-use virtual card to include in the transmission. | An existing single-use virtual card token. <br> <br> Submit a GET to /cards/user/{token} to retrieve card tokens for a particular user. 
 | fax_recipient | string | No | The fax number of the intended recipient. <br> <br> Required if transmission_method is FAX. |  Format your fax number as +(country code)(area code)(fax number) with no spaces or hyphens. For example, +1231231234. 
@@ -36,15 +37,16 @@ The following image shows a sample email transmission:
 
 ==== The metadata object
 
+[cols="10,10,10,50,20"]
 |===
 | Name | Type | Required? | Description | Allowable Values
 
-| *custom\_name\_01*<br>*custom\_name\_02* <br> <br> ... <br> <br> *custom\_name\_20* <br> <br> (255 char max per name) | string | No | Custom data transmitted with the card data. You can define the names and values of up to 20 fields, for example:<br><br><span class="code-font">"metadata": {<br>&nbsp;&nbsp;"my\_name\_1": "my\_value\_1",<br>&nbsp;&nbsp;"my\_name\_2": "my\_value\_2"<br>&nbsp;&nbsp;}</span> | Up to 20 name-value pairs. <br> <br> 255 char max per name; 255 char max per value.
+| *custom\_name\_01* ... *custom\_name\_20* <br> <br> (255 char max per name) | string | No | Custom data transmitted with the card data. You can define the names and values of up to 20 fields, for example:<br><br><span class="code-font">"metadata": {<br>&nbsp;&nbsp;"my\_name\_1": "my\_value\_1",<br>&nbsp;&nbsp;"my\_name\_2": "my\_value\_2"<br>&nbsp;&nbsp;}</span> | Up to 20 name-value pairs. <br> <br> 255 char max per name; 255 char max per value.
 |===
 
 ==== The transmission_outbounds object (response only)
 
-[cols="4"]
+[cols="10,10,50,20"]
 |===
 | Name| Type | Description | Allowable Values
 
@@ -71,4 +73,4 @@ include::POST_transmissions_request.json[]
 === Sample response body
 
 [source,json]
-include::POST_transmissions_request.json[]
+include::POST_transmissions_response.json[]

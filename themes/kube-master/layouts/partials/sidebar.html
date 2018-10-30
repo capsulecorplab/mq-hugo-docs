@@ -1,6 +1,29 @@
+<div class="nav-section">
+{{ $pageAddress := .Permalink }}
 {{ range $section, $taxonomy := .Site.Sections }}
-<h2>{{ .Title }}</h2>
-    {{ range $taxonomy.Pages }}
-    <div class="sidebar-item"><a href="{{ .Permalink}}"> {{ .LinkTitle }} </a></div>
-    {{ end }}
+    <h2>{{ .Title }}</h2>
+    <div class="nav-body">
+        {{ range $taxonomy.Pages }}
+        <div class="sidebar-item"><a href="{{ .Permalink}}"> {{ .LinkTitle }} </a></div>
+        {{ end }}
+        {{ range $subsection, $subtaxonomy := $taxonomy.Sections}}
+            <div class="nav-section">
+                <h2>{{.Title}}</h2>
+                <div class="nav-body">
+                    {{ range .Pages }}
+                        {{if eq $pageAddress .Permalink }}
+                            <div class="sidebar-item current-page"><a href="{{ .Permalink}}"> {{ .LinkTitle }} </a></div>    
+                        {{else}}
+                           <div class="sidebar-item"><a href="{{ .Permalink}}"> {{ .LinkTitle }} </a></div>
+                        {{end}}
+                    {{ end }}
+                    {{ range $subsection, $subtaxonomy := .Sections}}
+                        {{ partial "subsection" $subtaxonomy }}
+                    {{ end }}
+                </div>
+            </div>
+        {{ end }}
+    </div>
+    
 {{ end }}
+</div>

@@ -5,6 +5,8 @@ title = "Transmissions"
 = Transmissions
 :endpointdir: content/api/core/transmissions
 :outfilesuffix: /
+:object: transmission
+:source-highlighter: highlightjs
 
 Use the `/transmissions` endpoint to send payment information to a recipient securely by email or fax. 
 The transmission includes details for a single-use virtual card, along with optional metadata that is relevant to the payment. 
@@ -21,3 +23,14 @@ By default, the link expires 48 hours after creation and can only be accessed th
 If you are interested in using this feature, contact your Marqeta Customer Success representative for more information.
 
 include::{endpointdir}/POST_transmissions.adoc[]
+
+
+[source,json]
+----
+{
+    "token": "boo",
+    "transmission_method": "EMAIL",
+    "card_token": "e02cf1fa-75a5-48ab",
+    "transmission_attempt_count": 1
+}
+----
