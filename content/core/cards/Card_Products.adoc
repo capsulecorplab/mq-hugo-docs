@@ -1,0 +1,11 @@
++++
+title = "Card Products"
++++
+
+= Card Products
+:endpointdir: content/api/core/card_products
+:outfilesuffix: /
+:object: card product
+:source-highlighter: highlightjs
+
+Stuff.

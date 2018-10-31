@@ -1,0 +1,11 @@
++++
+title = "Bulk Card Orders"
++++
+
+= Bulk Card Orders
+:endpointdir: content/api/core/bulk_issuances
+:outfilesuffix: /
+:object: bulk card order
+:source-highlighter: highlightjs
+
+Stuff.
