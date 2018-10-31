@@ -2,6 +2,8 @@
 title = "About Address Verification"
 categories = ["Cards"]
 tags = ["Cards", "AVS", "Identity Verification"]
+weight = 200
+myThing = "AVS"
 +++
 
 = About Address Verification

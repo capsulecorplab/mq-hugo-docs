@@ -9,7 +9,7 @@
             <div class="nav-body">
                 <h2>{{.Title}}</h2>
                 <div class="nav-body">
-                    {{ range .Pages }}
+                    {{ range .Pages.ByWeight }}
                         {{if eq $pageAddress .Permalink }}
                             <div class="sidebar-item current-page"><a href="{{ .Permalink}}"> {{ .LinkTitle }} </a></div>
                         {{else}}

@@ -2,6 +2,7 @@
 title = "About Cards"
 categories = ["Cards"]
 tags = ["Cards", "Issuing", "Virtual", "Physical"]
+weight = 100
 +++
 
 = About Cards
