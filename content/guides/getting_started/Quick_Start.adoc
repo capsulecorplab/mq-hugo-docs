@@ -5,6 +5,8 @@ categories = ["Getting Started"]
 +++
 // This doesn't show up, does it?
 
+= Quick Start
+
 WARNING: I've made an arbitrary addition to this page so that there is something different on this branch to compare to. Neat! Yay!
 
 Marqeta provides its customers with a sandbox environment in order to aquaint them with the Marqeta API. 

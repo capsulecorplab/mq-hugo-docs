@@ -1,5 +1,5 @@
 +++
-title = "Guides"
+title = "Developer Guides"
 weight = 15
 hideSidebar = false
 +++

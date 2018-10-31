@@ -3,10 +3,10 @@
 {{ $thisSection := .CurrentSection }}
 {{ range $section, $taxonomy := .Site.Sections }}
     {{if eq $thisSection.Parent .CurrentSection}}
-    <h2 id = "collection">{{.Title}}</h2>
+
     <div class="nav-body">
         {{ range $subsection, $subtaxonomy := $taxonomy.Sections}}
-            <div class="nav-section">
+            <div class="nav-body">
                 <h2>{{.Title}}</h2>
                 <div class="nav-body">
                     {{ range .Pages }}
