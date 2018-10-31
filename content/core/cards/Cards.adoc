@@ -7,6 +7,9 @@ title = "Cards"
 :outfilesuffix: /
 :object: card
 :source-highlighter: highlightjs
+:toc:
+:toc-title:
+:toclevels: 1
 
 The cards resource represents the payment cards with which users conduct transactions. 
 Cards are owned by users and communicate with the Marqeta platform over card networks such as Discover, Mastercard, and Visa. 

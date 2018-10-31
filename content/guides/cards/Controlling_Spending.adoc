@@ -6,7 +6,7 @@ categories = ["Cards"]
 = Controlling Spending
 :outfilesuffix: /
 :toc: 
-:toc-title: In this guide
+:toc-title: In this guide:
 :toclevels: 1
 
 The Marqeta platform enables you to create controls for limiting user spending. 
@@ -20,7 +20,7 @@ You can control a user's spending based on:
 - How much the user spends (transaction amount and frequency of spending in a given time period).
 - How much the user spends at a specific merchant or category of merchants.
 
-The platform also allows you to update and list existing controls. For a complete description of the `/authcontrols endpoint`, see the Authorization Controls page. For a complete description of the `/velocitycontrols` endpoint, see the Velocity Controls page.
+The platform also allows you to update and list existing controls. For a complete description of the `/authcontrols` endpoint, see the Authorization Controls page. For a complete description of the `/velocitycontrols` endpoint, see the Velocity Controls page.
 
 At the end of the guide, you should understand:
 
@@ -30,7 +30,7 @@ At the end of the guide, you should understand:
 
 == Prerequisites
 
-- Read the Quick Start Guide.
+- Read the <</guides/getting_started/quick_start.adoc#_quick_start, Quick Start>> guide.
 - Obtain a card product token and a token for an active card that is associated with that card product.
 
 == Concepts
