@@ -5,6 +5,8 @@ categories = ["Getting Started"]
 +++
 
 = Summary of Resources
+:toc: 
+:toc-title: In this guide
 
 The Marqeta payment platform is designed to be comprehensive and flexible: you can pick and choose from a variety of implementation options that best suit the needs of your audience.
 Having an understanding of the Marqeta platform components and their relationships is key to maximizing the features of this powerful API and getting most out of your payment card platform.

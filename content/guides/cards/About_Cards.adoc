@@ -7,6 +7,9 @@ tags = ["Cards", "Issuing", "Virtual", "Physical"]
 = About Cards
 :outfilesuffix: /
 :topicdir: content/topics/cards
+:toc: 
+:toc-title: In this guide
+:toclevels: 1
 
 A card is a payment device that enables a user to conduct transactions at merchants.
 Cards can be physical or virtual.

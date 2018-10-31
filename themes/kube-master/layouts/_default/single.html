@@ -1,5 +1,16 @@
 {{ define "title"}} {{ .Title}} {{end}}
-{{ define "header"}} {{ partial "header" .}} {{end}}
+{{ define "header"}} {{ partial "header" .}} 
+<div id="second-nav">
+    <div id="second-nav-left">
+      {{.CurrentSection.Parent.Title}}
+    </div>
+    <div id="second-nav-center">
+      {{.Parent.Title}} > {{.Title}}
+    </div>
+  </div>
+
+{{end}}
+  
 
 {{ define "main" }}
 

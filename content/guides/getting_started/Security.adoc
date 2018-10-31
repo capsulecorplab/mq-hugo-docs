@@ -5,6 +5,8 @@ categories = ["Getting Started"]
 +++
 
 = Security
+:toc: 
+:toc-title: In this guide
 
 At Marqeta, security is paramount.
 

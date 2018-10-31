@@ -4,7 +4,7 @@ body {
 }
 
 p {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 header {
@@ -13,7 +13,7 @@ header {
 
 #posts {
     text-align: left;
-    line-height: 1.6rem;
+    line-height: 1.8rem;
     font-size: 1rem;
     margin-top: 0px;
     width: 800px;
@@ -22,9 +22,38 @@ header {
 }
 
 #posts li p {
-margin-bottom: 5px;
+    margin-bottom: 5px;
 }
 
+#preamble {
+    border-bottom: 1px #eee solid;
+    padding-bottom: 10px;
+}
+
+#toc{
+    position: absolute;
+    top: 120px;
+    right: 0px;
+    width: 400px;
+}
+
+#toc ul{
+    margin: 0px;
+}
+
+#toc .sectlevel2 {
+    margin-left: 20px;
+}
+
+#toc li{
+    margin-bottom: 5px; 
+    list-style: none;
+}
+
+#toctitle{
+    font-weight: 400;
+    margin-bottom: 10px; 
+}
 
 .admonitionblock{
     background: #eee;
@@ -132,7 +161,7 @@ h4{
     padding: 5px;
     border-right: 1px #eee solid;
     padding-left: 50px;
-    background: #eee;
+    background: #efefef;
 }
 
 .sidebar h2{
@@ -153,7 +182,7 @@ h4{
 
 .main-content {
     max-width: 800px;
-    padding-left: 25px;
+    padding-left: 50px;
 }
 
 .page-container {
@@ -189,6 +218,7 @@ h4{
     margin-bottom: 0px !important;
     border-bottom: 1px #eee solid;
     padding-left: 50px;
+    text-transform: uppercase;
 }
 
 #top #top-nav-main {
@@ -213,7 +243,7 @@ h4{
 }
 
 #second-nav{
-    background: #555;
+    background: #130959;
     height: 30px;
     color: #eee;
     line-height: 30px;
@@ -222,8 +252,9 @@ h4{
 
 #second-nav-left{
     margin-left: 50px;
-    width: 250px;
+    width: 275px;
     float: left;
+    text-transform: uppercase;
 }
 
 #title-tag{
