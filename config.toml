@@ -1,4 +1,4 @@
-ignorefiles = [ "snippets", "api", "topics" ]
+ignorefiles = [ "snippets", "api", "topics", "tutorials" ]
 
 baseURL = "https://www.mqdocs.com/"
 languageCode = "en-us"
