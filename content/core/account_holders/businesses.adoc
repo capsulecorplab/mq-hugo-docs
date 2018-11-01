@@ -1,6 +1,6 @@
 +++
 title = "Businesses"
-tags = ["Businesses", "Account Holders"]
+tags = ["Businesses", "Account Holders", "GPA"]
 weight = 100
 +++
 

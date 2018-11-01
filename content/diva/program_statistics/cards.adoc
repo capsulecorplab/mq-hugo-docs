@@ -7,12 +7,13 @@ tags = ["Cards"]
 :toc:
 :toc-title:
 :toclevels: 1
+:outfilesuffix: /
 
 Use this view endpoint to retrieve card state and history data aggregated by card. 
 The data is derived from card information in the Marqeta platform.
 
 This endpoint supports multiple response formats, query filtering, field filtering, sorting, and pagination. 
-For more information about response options, see Response Customization.
+For more information about response options, see <</diva/basics/response_customization.adoc#_response_customization, Response Customization>>.
 
 == Retrieve card data (JSON)
 
