@@ -6,7 +6,7 @@ tags = ["Cards", "Security"]
 
 = Managing Lost, Stolen, or Damaged Cards
 :toc: 
-:toc-title: In this guide:
+:toc-title:
 
 You might need to suspend, terminate, and/or reissue a card if it is lost, damaged, or stolen. 
 You can perform these actions on physical and virtual cards as well as on any digital wallet tokens sourced from the affected card.

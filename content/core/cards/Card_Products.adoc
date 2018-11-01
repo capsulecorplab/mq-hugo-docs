@@ -1,5 +1,6 @@
 +++
 title = "Card Products"
+weight = 10
 +++
 
 = Card Products
@@ -7,5 +8,8 @@ title = "Card Products"
 :outfilesuffix: /
 :object: card product
 :source-highlighter: highlightjs
+:toc:
+:toc-title:
+:toclevels: 1
 
 Stuff.

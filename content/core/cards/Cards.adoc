@@ -1,6 +1,7 @@
 +++
 title = "Cards"
 tags = ["Cards"]
+weight = 1
 +++
 
 = Cards

@@ -9,7 +9,7 @@ weight = 100
 :outfilesuffix: /
 :topicdir: content/topics/cards
 :toc: 
-:toc-title: In this guide:
+:toc-title:
 :toclevels: 1
 
 A card is a payment device that enables a user to conduct transactions at merchants.

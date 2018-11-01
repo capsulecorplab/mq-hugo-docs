@@ -9,7 +9,7 @@ myThing = "AVS"
 = About Address Verification
 :topicdir: content/topics/cards
 :toc: 
-:toc-title: In this guide:
+:toc-title:
 
 The *Address Verification System (AVS)* compares purchaser-provided address data against card holder address data held on file by the Marqeta platform and makes a match determination.
 You can configure AVS to decline transactions programmatically based on a mismatched street address or postal code.

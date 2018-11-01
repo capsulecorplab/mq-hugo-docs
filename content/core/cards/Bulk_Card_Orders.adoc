@@ -1,5 +1,6 @@
 +++
 title = "Bulk Card Orders"
+weight = 20
 +++
 
 = Bulk Card Orders
@@ -7,5 +8,8 @@ title = "Bulk Card Orders"
 :outfilesuffix: /
 :object: bulk card order
 :source-highlighter: highlightjs
+:toc:
+:toc-title:
+:toclevels: 1
 
 Stuff.

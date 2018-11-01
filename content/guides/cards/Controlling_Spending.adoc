@@ -7,7 +7,7 @@ tags = ["Spend controls", "Cards"]
 = Controlling Spending
 :outfilesuffix: /
 :toc: 
-:toc-title: In this guide:
+:toc-title:
 :toclevels: 1
 :topicdir: content/topics/cards
 

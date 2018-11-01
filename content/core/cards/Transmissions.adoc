@@ -1,5 +1,6 @@
 +++
 title = "Transmissions"
+weight = 30
 +++
 
 = Transmissions
@@ -7,6 +8,9 @@ title = "Transmissions"
 :outfilesuffix: /
 :object: transmission
 :source-highlighter: highlightjs
+:toc:
+:toc-title:
+:toclevels: 1
 
 Use the `/transmissions` endpoint to send payment information to a recipient securely by email or fax. 
 The transmission includes details for a single-use virtual card, along with optional metadata that is relevant to the payment. 
