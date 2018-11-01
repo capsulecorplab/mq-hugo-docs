@@ -2,6 +2,7 @@
 title = "Security"
 weight = 20
 categories = ["Getting Started"]
+tags = ["Security"]
 +++
 
 = Security

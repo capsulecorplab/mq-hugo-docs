@@ -1,6 +1,7 @@
 +++
 title = "Controlling Spending"
 categories = ["Cards"]
+tags = ["Spend controls", "Cards"]
 +++
 
 = Controlling Spending

@@ -22,7 +22,21 @@
  {{ .Content }}
   
 </ul>
+
+{{ $related := .Site.RegularPages.Related . | first 5 }}
+{{ with $related }}
+<div id="see-also">See Also</div>
+<div id="toc">
+    <ul>
+        {{ range . }}
+        <li><a href="{{ .RelPermalink }}">{{.CurrentSection.Parent.Params.shortTitle}} / {{ .Title }}</a></li>
+        {{ end }}
+      </ul>
+</div>
+{{ end }}
+
 {{ end }} 
+
 {{ define "footer" }} 
   {{ partial "footer" . }} 
 {{ end }}

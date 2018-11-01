@@ -1,6 +1,7 @@
 +++
 title = "Managing Lost, Stolen, or Damaged Cards"
 categories = ["Cards"]
+tags = ["Cards", "Security"]
 +++
 
 = Managing Lost, Stolen, or Damaged Cards

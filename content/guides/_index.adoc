@@ -1,5 +1,6 @@
 +++
 title = "Developer Guides"
+shortTitle = "Guides"
 weight = 15
 hideSidebar = false
 +++

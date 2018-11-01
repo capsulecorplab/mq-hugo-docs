@@ -11,8 +11,6 @@ header {
     font-family: "Open Sans";
 }
 
-
-
 #posts {
     text-align: left;
     line-height: 1.8rem;
@@ -153,6 +151,13 @@ header {
     color: #130959;
     margin-top: 28px;
     line-height: 48px;
+    margin-bottom: 15px;
+}
+
+#reading-time{
+    font-size: 12px;
+    margin-top: -5px;
+    margin-bottom: 20px;
 }
 
 .sectionbody{
@@ -166,8 +171,6 @@ header {
     color: #130959;
     margin-top: 30px;
 }
-
-
 
 h3{
     font-family: 'Open Sans';
@@ -226,7 +229,7 @@ h4{
 }
 
 .sidebar-item.current-page {
-    text-decoration: underline;
+    text-indent:-20px;
 }
 
 .sidebar-item.current-page > a {
@@ -291,4 +294,11 @@ h4{
 
 #footer{
     margin:0px;
+}
+
+#see-also{
+    font-size:20px;
+    margin-bottom: 10px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
 }

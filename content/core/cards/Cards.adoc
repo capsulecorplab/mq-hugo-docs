@@ -1,5 +1,6 @@
 +++
 title = "Cards"
+tags = ["Cards"]
 +++
 
 = Cards
