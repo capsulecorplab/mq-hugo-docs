@@ -30,7 +30,7 @@ For more information on cards, see <</guides/cards/about_cards.adoc#_about_cards
 
 Use this endpoint to order cards in bulk.
 
-[NOTE ]
+[WARNING]
 Before creating a bulk card order, ensure that the `config.fulfillment.bulk_ship` field of the associated card product is set to true.
 
 As part of creating a bulk card order, you either associate all cards with the same user or each card with a unique user.
