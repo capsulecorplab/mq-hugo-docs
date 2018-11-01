@@ -1,6 +1,7 @@
 +++
 title = "Transmissions"
 weight = 30
+tags = ["Disbursements", "Cards"]
 +++
 
 = Transmissions

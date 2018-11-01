@@ -6,8 +6,9 @@
   </div>
   <nav id="top-nav-main">
     <ul>
-      <li><b>Guides</b></li>
-      <li>API Reference</li>
+      {{ range .Site.Sections.ByWeight }}
+        <li><a href="{{ .Permalink }}">{{.Params.shortTitle}}</a></li>
+        {{ end }}
       <li>Sandbox</li>
       <li>SDKs</li>
       <li>More</li>

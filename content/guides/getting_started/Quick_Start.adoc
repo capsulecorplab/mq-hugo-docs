@@ -7,7 +7,7 @@ categories = ["Getting Started"]
 
 = Quick Start
 :toc: 
-:toc-title: In this guide:
+:toc-title:
 
 Marqeta provides its customers with a sandbox environment in order to aquaint them with the Marqeta API. 
 The sandbox allows customers to create the objects required to conduct financial transactions and to then simulate transactions using those objects.

@@ -1,26 +1,36 @@
 {{ define "title"}} {{ .Title}} {{end}}
-{{ define "header"}} {{ partial "header" .}} {{end}}
+{{ define "header"}} {{ partial "header" .}} 
+
+<div id="second-nav">
+    <div id="second-nav-left">
+
+    </div>
+    <div id="second-nav-center">
+ 
+    </div>
+  </div>
+
+{{end}}
 
 {{ define "main" }}
 
 <div id="hero" class="wrap">
   <h1>{{.Title}}</h1>
 </div>
-<ul id="posts">
 
- {{ range .Paginator.Pages.ByTitle }} {{ partial "page-summary" . }} {{ end }}
-
- {{ range $section, $taxonomy := .Site.Sections }}
-    <h2>{{ .Title }}</h2>
-    <ul>
-        {{ range $taxonomy.Pages }}
-        <li><a href="{{ .Permalink}}"> {{ .LinkTitle }} </a> </li>
-        {{ end }}
-    </ul>
+<div>
+    {{ $thisSection := .CurrentSection}}
+    {{ range .Site.RegularPages.ByTitle }}
+    {{ if eq $thisSection .Parent.Parent}}
+    <div>
+        <a href="{{.Permalink}}">{{.Parent.Title}} > {{.Title}}</a>
+    </div>
+    {{ end }}
 {{ end }}
-</ul>
+</div>
 
 {{ end }} 
 {{ define "footer" }} 
   {{ partial "footer" . }} 
 {{ end }}
+

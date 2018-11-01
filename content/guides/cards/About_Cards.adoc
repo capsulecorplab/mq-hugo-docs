@@ -34,4 +34,4 @@ include::{topicdir}/cards_in_the_payments_ecosystem.adoc[]
 
 include::{topicdir}/cards_the_card_object.adoc[]
 
-== The card lifecycle
+include::{topicdir}/cards_the_lifecycle.adoc[]
