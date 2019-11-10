@@ -4,7 +4,7 @@ baseURL = "https://www.mqdocs.com/"
 languageCode = "en-us"
 title = "Marqeta Developers"
 
-theme = "kube-master"
+theme = "hugo-theme-learn"
 
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
